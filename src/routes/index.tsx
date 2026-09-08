@@ -1,24 +1,202 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useRef, useState } from "react";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
   component: Index,
+  head: () => ({
+    meta: [
+      { title: "Faris Rahman — Video Editor & Photographer" },
+      {
+        name: "description",
+        content:
+          "Cinematic portfolio of Faris Rahman: film editing, photography stills and color grading work.",
+      },
+      { property: "og:title", content: "Faris Rahman — Video Editor & Photographer" },
+      {
+        property: "og:description",
+        content:
+          "Cinematic portfolio of Faris Rahman: film editing, photography stills and color grading work.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
+/* ---------- SWAP YOUR REAL ASSETS HERE ---------- */
+const HERO_VIDEO_SRC =
+  "https://cdn.coverr.co/videos/coverr-a-city-at-night-1080p.mp4";
+const HERO_VIDEO_FALLBACK =
+  "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+
+const PHOTOS = [
+  { src: "https://picsum.photos/id/1015/900/1200", alt: "River between mountains" },
+  { src: "https://picsum.photos/id/1021/900/700", alt: "Foggy forest ridge" },
+  { src: "https://picsum.photos/id/1040/900/1300", alt: "Castle on a cliff" },
+  { src: "https://picsum.photos/id/1050/900/800", alt: "Snow covered peaks" },
+  { src: "https://picsum.photos/id/1069/900/1100", alt: "Neon city street at night" },
+  { src: "https://picsum.photos/id/1074/900/900", alt: "Lion portrait" },
+  { src: "https://picsum.photos/id/1080/900/1200", alt: "Close up of strawberries" },
+  { src: "https://picsum.photos/id/1084/900/700", alt: "Desert horizon" },
+  { src: "https://picsum.photos/id/110/900/1150", alt: "Lake reflection at dawn" },
+];
+
+const GRADE_IMAGE = "https://picsum.photos/id/1018/1600/900";
+/* ------------------------------------------------ */
+
+const NAV = [
+  { href: "#main-video", label: "Main Video" },
+  { href: "#photos", label: "Photos" },
+  { href: "#color-grading", label: "Color Grading" },
+];
+
+function useReveal<T extends HTMLElement>() {
+  const ref = useRef<T | null>(null);
+  const [shown, setShown] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) if (e.isIntersecting) setShown(true);
+      },
+      { threshold: 0.15 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return { ref, className: shown ? "reveal is-visible" : "reveal" };
+}
+
+function Header() {
+  return (
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/60 backdrop-blur-xl">
+      <nav className="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-4 sm:flex sm:justify-between">
+        <a href="#main-video" className="truncate text-xs font-semibold tracking-[0.35em] uppercase">
+          Faris Rahman
+        </a>
+        <ul className="flex shrink-0 items-center gap-4 text-[10px] tracking-[0.2em] uppercase sm:gap-8 sm:text-xs">
+          {NAV.map((n) => (
+            <li key={n.href}>
+              <a href={n.href} className="nav-link text-muted-foreground">
+                {n.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </header>
+  );
+}
+
+function Hero() {
+  return (
+    <section id="main-video" className="relative flex min-h-screen items-center justify-center overflow-hidden bg-black px-4">
+      <video
+        className="hero-video"
+        autoPlay
+        loop
+        muted
+        playsInline
+        poster="https://picsum.photos/id/1039/1600/900"
+      >
+        <source src={HERO_VIDEO_SRC} type="video/mp4" />
+        <source src={HERO_VIDEO_FALLBACK} type="video/mp4" />
+      </video>
+      <div className="relative z-10 text-center">
+        <p className="mb-6 text-[10px] tracking-[0.5em] text-muted-foreground uppercase sm:text-xs">
+          Video Editor · Photographer
+        </p>
+        <h1 className="hero-title">FARIS RAHMAN</h1>
+        <p className="mx-auto mt-8 max-w-md text-sm leading-relaxed text-muted-foreground">
+          Cinematic storytelling through motion, light and color.
+        </p>
+      </div>
+      <a
+        href="#photos"
+        className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-[10px] tracking-[0.3em] text-muted-foreground uppercase"
+      >
+        Scroll
+      </a>
+    </section>
+  );
+}
+
+function Photos() {
+  const reveal = useReveal<HTMLElement>();
+  return (
+    <section id="photos" ref={reveal.ref} className={`${reveal.className} bg-background px-5 py-28 sm:py-40`}>
+      <div className="mx-auto max-w-6xl">
+        <h2 className="section-title">Photos</h2>
+        <p className="mt-4 max-w-md text-sm text-muted-foreground">
+          Selected stills — travel, portrait and available-light work.
+        </p>
+        <div className="masonry mt-14">
+          {PHOTOS.map((p) => (
+            <figure key={p.src} className="photo-card">
+              <img src={p.src} alt={p.alt} loading="lazy" />
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ColorGrading() {
+  const reveal = useReveal<HTMLElement>();
+  const [value, setValue] = useState(55);
+  return (
+    <section
+      id="color-grading"
+      ref={reveal.ref}
+      className={`${reveal.className} bg-background px-5 pb-32 sm:pb-44`}
+    >
+      <div className="mx-auto max-w-6xl">
+        <h2 className="section-title">Color Grading</h2>
+        <p className="mt-4 max-w-md text-sm text-muted-foreground">
+          Drag to compare the untouched capture with the final cinematic grade.
+        </p>
+
+        <div className="compare mt-14">
+          <img src={GRADE_IMAGE} alt="Raw ungraded frame" loading="lazy" className="compare-img raw" />
+          <img
+            src={GRADE_IMAGE}
+            alt="Color graded frame"
+            loading="lazy"
+            className="compare-img graded"
+            style={{ clipPath: `inset(0 ${100 - value}% 0 0)` }}
+          />
+          <span className="compare-line" style={{ left: `${value}%` }} aria-hidden="true" />
+          <span className="badge left-4 sm:left-6">Raw</span>
+          <span className="badge right-4 sm:right-6">Graded</span>
+          <input
+            type="range"
+            min={0}
+            max={100}
+            value={value}
+            aria-label="Compare raw and graded image"
+            onChange={(e) => setValue(Number(e.target.value))}
+            className="compare-range"
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen bg-background text-foreground">
+      <Header />
+      <main>
+        <Hero />
+        <Photos />
+        <ColorGrading />
+      </main>
+      <footer className="border-t border-border/60 px-5 py-10 text-center text-[10px] tracking-[0.3em] text-muted-foreground uppercase">
+        © {new Date().getFullYear()} Faris Rahman
+      </footer>
     </div>
   );
 }
