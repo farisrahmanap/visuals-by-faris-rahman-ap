@@ -163,7 +163,7 @@ function ColorGrading() {
             alt="Color graded frame"
             loading="lazy"
             className="compare-img graded"
-            style={{ clipPath: `inset(0 ${100 - value}% 0 0)` }}
+            style={{ clipPath: `inset(0 0 0 ${value}%)` }}
           />
           <span className="compare-line" style={{ left: `${value}%` }} aria-hidden="true" />
           <span className="badge left-4 sm:left-6">Raw</span>
