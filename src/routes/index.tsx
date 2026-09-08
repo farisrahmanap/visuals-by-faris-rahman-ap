@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 
+import heroVideo from "@/assets/hero-placeholder.mp4.asset.json";
+
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
@@ -24,10 +26,7 @@ export const Route = createFileRoute("/")({
 });
 
 /* ---------- SWAP YOUR REAL ASSETS HERE ---------- */
-const HERO_VIDEO_SRC =
-  "https://cdn.coverr.co/videos/coverr-a-city-at-night-1080p.mp4";
-const HERO_VIDEO_FALLBACK =
-  "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+const HERO_VIDEO_SRC = heroVideo.url;
 
 const PHOTOS = [
   { src: "https://picsum.photos/id/1015/900/1200", alt: "River between mountains" },
@@ -101,7 +100,6 @@ function Hero() {
         poster="https://picsum.photos/id/1039/1600/900"
       >
         <source src={HERO_VIDEO_SRC} type="video/mp4" />
-        <source src={HERO_VIDEO_FALLBACK} type="video/mp4" />
       </video>
       <div className="relative z-10 text-center">
         <p className="mb-6 text-[10px] tracking-[0.5em] text-muted-foreground uppercase sm:text-xs">
