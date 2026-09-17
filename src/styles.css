@@ -295,10 +295,30 @@
 @utility compare {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
   overflow: hidden;
   user-select: none;
-  background: #000;
+  background: var(--color-card);
+}
+
+@utility grade-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+}
+
+@utility compare-portrait {
+  aspect-ratio: 3 / 4;
+}
+
+@utility compare-landscape {
+  aspect-ratio: 4 / 3;
+  @media (min-width: 768px) {
+    grid-column: 1 / -1;
+  }
 }
 
 @utility compare-img {
@@ -307,13 +327,6 @@
   height: 100%;
   width: 100%;
   object-fit: cover;
-  &.raw {
-    filter: grayscale(85%) saturate(45%) brightness(0.95) contrast(95%);
-  }
-  &.graded {
-    filter: saturate(135%) contrast(118%) sepia(18%) hue-rotate(-8deg)
-      brightness(1.03);
-  }
 }
 
 @utility compare-line {
