@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 
-import heroVideo from "@/assets/hero-placeholder.mp4.asset.json";
+import heroVideo from "@/assets/For_Portfolio.mp4.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Index,
