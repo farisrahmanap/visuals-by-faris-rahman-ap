@@ -90,7 +90,7 @@ function Header() {
 
 function Hero() {
   return (
-    <section id="main-video" className="relative flex min-h-screen items-center justify-center overflow-hidden bg-black px-4">
+    <section id="main-video" className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background px-4">
       <video
         className="hero-video"
         autoPlay
@@ -101,12 +101,17 @@ function Hero() {
       >
         <source src={HERO_VIDEO_SRC} type="video/mp4" />
       </video>
-      <div className="relative z-10 text-center">
+      <div className="hero-atmosphere" aria-hidden="true" />
+      <div className="relative z-10 flex flex-col items-center text-center">
         <p className="mb-6 text-[10px] tracking-[0.5em] text-muted-foreground uppercase sm:text-xs">
           Video Editor · Photographer
         </p>
-        <h1 className="hero-title">FARIS RAHMAN</h1>
-        <p className="mx-auto mt-8 max-w-md text-sm leading-relaxed text-muted-foreground">
+        <h1 className="hero-title">
+          <span className="hero-title-primary">FARIS</span>
+          <span className="hero-title-secondary">RAHMAN</span>
+        </h1>
+        <span className="hero-divider" aria-hidden="true" />
+        <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
           Cinematic storytelling through motion, light and color.
         </p>
       </div>

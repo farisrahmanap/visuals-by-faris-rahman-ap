@@ -206,22 +206,50 @@
   height: 100%;
   width: 100%;
   object-fit: cover;
-  opacity: 0.18;
-  filter: grayscale(30%) contrast(115%);
+  opacity: 0.62;
+  filter: saturate(78%) contrast(112%) brightness(72%);
+  transform: scale(1.015);
+}
+
+@utility hero-atmosphere {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to top, var(--color-background), transparent 42%, color-mix(in oklab, var(--color-background) 56%, transparent)),
+    radial-gradient(circle at center, transparent 8%, color-mix(in oklab, var(--color-background) 66%, transparent) 100%);
 }
 
 @utility hero-title {
   font-size: clamp(2.75rem, 13vw, 12rem);
-  line-height: 0.92;
+  line-height: 0.84;
   font-weight: 900;
-  letter-spacing: -0.03em;
-  background-image: url("https://picsum.photos/id/1039/1600/900");
-  background-size: cover;
-  background-position: center;
+  letter-spacing: 0;
+  text-align: center;
+  text-transform: uppercase;
+  filter: drop-shadow(0 0 22px color-mix(in oklab, var(--color-foreground) 18%, transparent));
+}
+
+@utility hero-title-primary {
+  display: block;
+  color: color-mix(in oklab, var(--color-foreground) 94%, transparent);
+  mix-blend-mode: plus-lighter;
+}
+
+@utility hero-title-secondary {
+  display: block;
+  color: transparent;
+  background: linear-gradient(to bottom, color-mix(in oklab, var(--color-foreground) 94%, transparent), color-mix(in oklab, var(--color-foreground) 24%, transparent));
   background-clip: text;
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
+}
+
+@utility hero-divider {
+  display: block;
+  width: 2rem;
+  height: 1px;
+  margin-top: 2rem;
+  background: color-mix(in oklab, var(--color-foreground) 32%, transparent);
 }
 
 @utility section-title {
