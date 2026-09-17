@@ -2,6 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 
 import heroVideo from "@/assets/For_Portfolio.mp4.asset.json";
+import gradedStyle2 from "@/assets/graded-style-2.jpg.asset.json";
+import gradedStyle3 from "@/assets/graded-style-3.jpg.asset.json";
+import gradedStyle4 from "@/assets/graded-style-4.jpg.asset.json";
+import gradedStyle5 from "@/assets/graded-style-5.jpg.asset.json";
+import gradedStyle6 from "@/assets/graded-style-6.jpg.asset.json";
+import rawStyle2 from "@/assets/raw-style-2.jpg.asset.json";
+import rawStyle3 from "@/assets/raw-style-3.jpg.asset.json";
+import rawStyle4 from "@/assets/raw-style-4.jpg.asset.json";
+import rawStyle5 from "@/assets/raw-style-5.jpg.asset.json";
+import rawStyle6 from "@/assets/raw-style-6.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -40,7 +50,38 @@ const PHOTOS = [
   { src: "https://picsum.photos/id/110/900/1150", alt: "Lake reflection at dawn" },
 ];
 
-const GRADE_IMAGE = "https://picsum.photos/id/1018/1600/900";
+const COLOR_GRADES = [
+  {
+    raw: rawStyle2.url,
+    graded: gradedStyle2.url,
+    alt: "Mountain swing overlooking misty hills",
+    orientation: "portrait",
+  },
+  {
+    raw: rawStyle3.url,
+    graded: gradedStyle3.url,
+    alt: "Illuminated observation wheel at dusk",
+    orientation: "portrait",
+  },
+  {
+    raw: rawStyle4.url,
+    graded: gradedStyle4.url,
+    alt: "Tea plantation and hilltop trees",
+    orientation: "portrait",
+  },
+  {
+    raw: rawStyle5.url,
+    graded: gradedStyle5.url,
+    alt: "Tea-covered hills beneath mountain peaks",
+    orientation: "landscape",
+  },
+  {
+    raw: rawStyle6.url,
+    graded: gradedStyle6.url,
+    alt: "Car beside a mountain tea plantation",
+    orientation: "portrait",
+  },
+] as const;
 /* ------------------------------------------------ */
 
 const NAV = [
@@ -146,9 +187,42 @@ function Photos() {
   );
 }
 
+function GradeComparison({
+  raw,
+  graded,
+  alt,
+  orientation,
+}: (typeof COLOR_GRADES)[number]) {
+  const [value, setValue] = useState(55);
+
+  return (
+    <figure className={`compare ${orientation === "landscape" ? "compare-landscape" : "compare-portrait"}`}>
+      <img src={raw} alt={`RAW — ${alt}`} loading="lazy" className="compare-img raw" />
+      <img
+        src={graded}
+        alt={`Color graded — ${alt}`}
+        loading="lazy"
+        className="compare-img graded"
+        style={{ clipPath: `inset(0 0 0 ${value}%)` }}
+      />
+      <span className="compare-line" style={{ left: `${value}%` }} aria-hidden="true" />
+      <span className="badge left-4 sm:left-6">Raw</span>
+      <span className="badge right-4 sm:right-6">Graded</span>
+      <input
+        type="range"
+        min={0}
+        max={100}
+        value={value}
+        aria-label={`Compare RAW and graded versions of ${alt}`}
+        onChange={(e) => setValue(Number(e.target.value))}
+        className="compare-range"
+      />
+    </figure>
+  );
+}
+
 function ColorGrading() {
   const reveal = useReveal<HTMLElement>();
-  const [value, setValue] = useState(55);
   return (
     <section
       id="color-grading"
@@ -161,27 +235,10 @@ function ColorGrading() {
           Drag to compare the untouched capture with the final cinematic grade.
         </p>
 
-        <div className="compare mt-14">
-          <img src={GRADE_IMAGE} alt="Raw ungraded frame" loading="lazy" className="compare-img raw" />
-          <img
-            src={GRADE_IMAGE}
-            alt="Color graded frame"
-            loading="lazy"
-            className="compare-img graded"
-            style={{ clipPath: `inset(0 0 0 ${value}%)` }}
-          />
-          <span className="compare-line" style={{ left: `${value}%` }} aria-hidden="true" />
-          <span className="badge left-4 sm:left-6">Raw</span>
-          <span className="badge right-4 sm:right-6">Graded</span>
-          <input
-            type="range"
-            min={0}
-            max={100}
-            value={value}
-            aria-label="Compare raw and graded image"
-            onChange={(e) => setValue(Number(e.target.value))}
-            className="compare-range"
-          />
+        <div className="grade-grid mt-14">
+          {COLOR_GRADES.map((comparison) => (
+            <GradeComparison key={comparison.raw} {...comparison} />
+          ))}
         </div>
       </div>
     </section>
