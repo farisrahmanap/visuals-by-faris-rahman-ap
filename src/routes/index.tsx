@@ -153,7 +153,7 @@ function Hero() {
         </h1>
         <span className="hero-divider" aria-hidden="true" />
         <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
-          Cinematic storytelling through motion, light and color.
+          Visuals driven by editing, lighting, and color.
         </p>
       </div>
       <a
