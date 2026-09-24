@@ -13,6 +13,16 @@ import rawStyle3 from "@/assets/raw-style-3.jpg.asset.json";
 import rawStyle4 from "@/assets/raw-style-4.jpg.asset.json";
 import rawStyle5 from "@/assets/raw-style-5.jpg.asset.json";
 import rawStyle6 from "@/assets/raw-style-6.jpg.asset.json";
+import galleryLantern from "@/assets/gallery-lantern.jpg.asset.json";
+import galleryMountainSunset from "@/assets/gallery-mountain-sunset.jpg.asset.json";
+import galleryDomeCeiling from "@/assets/gallery-dome-ceiling.jpg.asset.json";
+import galleryMosqueInterior from "@/assets/gallery-mosque-interior.jpg.asset.json";
+import galleryHangingLamp from "@/assets/gallery-hanging-lamp.jpg.asset.json";
+import galleryMistyTeaHills from "@/assets/gallery-misty-tea-hills.jpg.asset.json";
+import galleryHumayunTomb from "@/assets/gallery-humayun-tomb.jpg.asset.json";
+import galleryIndiaGate from "@/assets/gallery-india-gate.jpg.asset.json";
+import galleryTajMahal from "@/assets/gallery-taj-mahal.jpg.asset.json";
+import galleryModernArchitecture from "@/assets/gallery-modern-architecture.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -41,15 +51,16 @@ const HERO_VIDEO_SRC = heroVideo.url;
 const SECOND_HERO_VIDEO_SRC = secondHeroVideo.url;
 
 const PHOTOS = [
-  { src: "https://picsum.photos/id/1015/900/1200", alt: "River between mountains" },
-  { src: "https://picsum.photos/id/1021/900/700", alt: "Foggy forest ridge" },
-  { src: "https://picsum.photos/id/1040/900/1300", alt: "Castle on a cliff" },
-  { src: "https://picsum.photos/id/1050/900/800", alt: "Snow covered peaks" },
-  { src: "https://picsum.photos/id/1069/900/1100", alt: "Neon city street at night" },
-  { src: "https://picsum.photos/id/1074/900/900", alt: "Lion portrait" },
-  { src: "https://picsum.photos/id/1080/900/1200", alt: "Close up of strawberries" },
-  { src: "https://picsum.photos/id/1084/900/700", alt: "Desert horizon" },
-  { src: "https://picsum.photos/id/110/900/1150", alt: "Lake reflection at dawn" },
+  { src: galleryLantern.url, alt: "Hanging lantern silhouetted against a mountain sunset" },
+  { src: galleryMountainSunset.url, alt: "Layered mountain landscape beneath a dramatic sunset sky" },
+  { src: galleryDomeCeiling.url, alt: "Symmetrical ornamental dome and ceiling viewed from below" },
+  { src: galleryMosqueInterior.url, alt: "Grand mosque interior with decorated columns and dome" },
+  { src: galleryHangingLamp.url, alt: "Mosaic hanging lamp beneath an ornate dome" },
+  { src: galleryMistyTeaHills.url, alt: "Misty green tea plantation rolling across the hills" },
+  { src: galleryHumayunTomb.url, alt: "Humayun's Tomb entrance beneath a clear blue sky" },
+  { src: galleryIndiaGate.url, alt: "India Gate framed by a broad cloud-filled sky" },
+  { src: galleryTajMahal.url, alt: "Taj Mahal framed by trees and gardens" },
+  { src: galleryModernArchitecture.url, alt: "Modern angular building reflecting an evening sky" },
 ];
 
 const COLOR_GRADES = [
