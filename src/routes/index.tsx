@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 
 import heroVideo from "@/assets/For_Portfolio.mp4.asset.json";
+import secondHeroVideo from "@/assets/0922_1.mp4.asset.json";
 import gradedStyle2 from "@/assets/graded-style-2.jpg.asset.json";
 import gradedStyle3 from "@/assets/graded-style-3.jpg.asset.json";
 import gradedStyle4 from "@/assets/graded-style-4.jpg.asset.json";
@@ -37,6 +38,7 @@ export const Route = createFileRoute("/")({
 
 /* ---------- SWAP YOUR REAL ASSETS HERE ---------- */
 const HERO_VIDEO_SRC = heroVideo.url;
+const SECOND_HERO_VIDEO_SRC = secondHeroVideo.url;
 
 const PHOTOS = [
   { src: "https://picsum.photos/id/1015/900/1200", alt: "River between mountains" },
@@ -85,7 +87,7 @@ const COLOR_GRADES = [
 /* ------------------------------------------------ */
 
 const NAV = [
-  { href: "#main-video", label: "Main Video" },
+  { href: "#video", label: "Video" },
   { href: "#photos", label: "Photos" },
   { href: "#color-grading", label: "Color Grading" },
 ];
@@ -112,7 +114,7 @@ function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/60 backdrop-blur-xl">
       <nav className="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-4 sm:flex sm:justify-between">
-        <a href="#main-video" className="truncate text-xs font-semibold tracking-[0.35em] uppercase">
+        <a href="#video" className="truncate text-xs font-semibold tracking-[0.35em] uppercase">
           Faris Rahman
         </a>
         <ul className="flex shrink-0 items-center gap-4 text-[10px] tracking-[0.2em] uppercase sm:gap-8 sm:text-xs">
@@ -131,37 +133,42 @@ function Header() {
 
 function Hero() {
   return (
-    <section id="main-video" className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background px-4">
-      <video
-        className="hero-video"
-        autoPlay
-        loop
-        muted
-        playsInline
-        poster="https://picsum.photos/id/1039/1600/900"
-      >
-        <source src={HERO_VIDEO_SRC} type="video/mp4" />
-      </video>
-      <div className="hero-atmosphere" aria-hidden="true" />
-      <div className="relative z-10 flex flex-col items-center text-center">
-        <p className="mb-6 text-[10px] tracking-[0.5em] text-muted-foreground uppercase sm:text-xs">
-          Video Editor · Photographer
-        </p>
-        <h1 className="hero-title">
-          <span className="hero-title-primary">FARIS</span>
-          <span className="hero-title-secondary">RAHMAN</span>
-        </h1>
-        <span className="hero-divider" aria-hidden="true" />
-        <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
-          Visuals driven by editing, lighting, and color.
+    <section id="video" className="bg-background">
+      <div className="relative flex min-h-screen items-center justify-center overflow-hidden px-4">
+        <video className="hero-video" autoPlay loop muted playsInline>
+          <source src={HERO_VIDEO_SRC} type="video/mp4" />
+        </video>
+        <div className="hero-atmosphere" aria-hidden="true" />
+        <div className="relative z-10 flex flex-col items-center text-center">
+          <p className="mb-6 text-[10px] tracking-[0.5em] text-muted-foreground uppercase sm:text-xs">
+            Video Editor · Photographer
+          </p>
+          <h1 className="hero-title">
+            <span className="hero-title-primary">FARIS</span>
+            <span className="hero-title-secondary">RAHMAN</span>
+          </h1>
+          <span className="hero-divider" aria-hidden="true" />
+          <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
+            Visuals driven by editing, lighting, and color.
+          </p>
+        </div>
+        <a
+          href="#video-two"
+          className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-[10px] tracking-[0.3em] text-muted-foreground uppercase"
+        >
+          Next video
+        </a>
+      </div>
+
+      <div id="video-two" className="relative flex min-h-screen items-end overflow-hidden">
+        <video className="hero-video" autoPlay loop muted playsInline>
+          <source src={SECOND_HERO_VIDEO_SRC} type="video/mp4" />
+        </video>
+        <div className="hero-atmosphere" aria-hidden="true" />
+        <p className="relative z-10 mb-10 ml-5 text-[10px] tracking-[0.35em] text-muted-foreground uppercase sm:mb-14 sm:ml-10">
+          Film 02
         </p>
       </div>
-      <a
-        href="#photos"
-        className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-[10px] tracking-[0.3em] text-muted-foreground uppercase"
-      >
-        Scroll
-      </a>
     </section>
   );
 }
