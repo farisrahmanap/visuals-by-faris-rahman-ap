@@ -23,6 +23,16 @@ import galleryHumayunTomb from "@/assets/gallery-humayun-tomb.jpg.asset.json";
 import galleryIndiaGate from "@/assets/gallery-india-gate.jpg.asset.json";
 import galleryTajMahal from "@/assets/gallery-taj-mahal.jpg.asset.json";
 import galleryModernArchitecture from "@/assets/gallery-modern-architecture.jpg.asset.json";
+import galleryForestRoad from "@/assets/gallery-forest-road.jpg.asset.json";
+import galleryCloudyBuilding from "@/assets/gallery-cloudy-building.jpg.asset.json";
+import gallerySunsetBoat from "@/assets/gallery-sunset-boat.jpg.asset.json";
+import galleryShoreRocks from "@/assets/gallery-shore-rocks.jpg.asset.json";
+import galleryBeachShell from "@/assets/gallery-beach-shell.jpg.asset.json";
+import galleryShellInHand from "@/assets/gallery-shell-in-hand.jpg.asset.json";
+import galleryTeaHillTrees from "@/assets/gallery-tea-hill-trees.jpg.asset.json";
+import galleryTeaValley from "@/assets/gallery-tea-valley.jpg.asset.json";
+import galleryButterflyDisplay from "@/assets/gallery-butterfly-display.jpg.asset.json";
+import galleryStormyMountain from "@/assets/gallery-stormy-mountain.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -61,6 +71,16 @@ const PHOTOS = [
   { src: galleryIndiaGate.url, alt: "India Gate framed by a broad cloud-filled sky" },
   { src: galleryTajMahal.url, alt: "Taj Mahal framed by trees and gardens" },
   { src: galleryModernArchitecture.url, alt: "Modern angular building reflecting an evening sky" },
+  { src: galleryForestRoad.url, alt: "Rain-soaked forest road with reflections in muddy puddles" },
+  { src: galleryCloudyBuilding.url, alt: "Palm-framed building beneath a dramatic cloudy sky" },
+  { src: gallerySunsetBoat.url, alt: "Fishing boat crossing the water beneath a hazy sunset" },
+  { src: galleryShoreRocks.url, alt: "Sea washing between moss-covered boulders on the beach" },
+  { src: galleryBeachShell.url, alt: "Seashell resting on sand beside the ocean" },
+  { src: galleryShellInHand.url, alt: "Seashell held against a coastal shoreline" },
+  { src: galleryTeaHillTrees.url, alt: "Cluster of trees on a sunlit tea plantation hill" },
+  { src: galleryTeaValley.url, alt: "Rolling tea fields and distant mountains in morning light" },
+  { src: galleryButterflyDisplay.url, alt: "Pink butterfly display inside a shopping gallery" },
+  { src: galleryStormyMountain.url, alt: "Storm clouds breaking over a mountain valley at sunset" },
 ];
 
 const COLOR_GRADES = [
