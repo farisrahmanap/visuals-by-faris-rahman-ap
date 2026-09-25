@@ -119,6 +119,7 @@ const COLOR_GRADES = [
 
 const NAV = [
   { href: "#video", label: "Video" },
+  { href: "#about", label: "About" },
   { href: "#photos", label: "Photos" },
   { href: "#color-grading", label: "Color Grading" },
 ];
@@ -179,8 +180,8 @@ function Hero() {
             <span className="hero-title-secondary">RAHMAN</span>
           </h1>
           <span className="hero-divider" aria-hidden="true" />
-          <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
-            Visuals driven by editing, lighting, and color.
+          <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed tracking-[0.25em] text-muted-foreground uppercase">
+            Shoot. Edit. Grade.
           </p>
         </div>
         <a
@@ -283,12 +284,69 @@ function ColorGrading() {
   );
 }
 
+const BIO = {
+  name: "Faris Rahman A P",
+  roles: ["Video Editor", "Photographer", "Color Grader", "Cinematographer"],
+  tools: [
+    "Adobe Premiere Pro",
+    "DaVinci Resolve",
+    "CapCut",
+    "Adobe Photoshop",
+    "Adobe After Effects",
+  ],
+  background:
+    "Mechanical Engineering student at T.K.M. College of Engineering, Kollam, Kerala.",
+  involvement: "Contributes to the media wing of the Civil Service Aspirants Club.",
+};
+
+function About() {
+  const reveal = useReveal<HTMLElement>();
+  return (
+    <section
+      id="about"
+      ref={reveal.ref}
+      className={`${reveal.className} bg-background px-5 py-28 sm:py-40`}
+    >
+      <div className="mx-auto max-w-6xl">
+        <h2 className="section-title">About</h2>
+        <p className="bio-name mt-12 sm:mt-16">{BIO.name}</p>
+        <ul className="mt-6 flex flex-wrap gap-x-8 gap-y-3">
+          {BIO.roles.map((role) => (
+            <li key={role} className="bio-role">
+              {role}
+            </li>
+          ))}
+        </ul>
+        <div className="bio-grid mt-16 sm:mt-24">
+          <div>
+            <p className="bio-label">Tools</p>
+            <ul className="mt-2">
+              {BIO.tools.map((tool) => (
+                <li key={tool} className="bio-item">
+                  {tool}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p className="bio-label">Background</p>
+            <p className="bio-text mt-4">{BIO.background}</p>
+            <p className="bio-label mt-10">Involvement</p>
+            <p className="bio-text mt-4">{BIO.involvement}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Header />
       <main>
         <Hero />
+        <About />
         <Photos />
         <ColorGrading />
       </main>
