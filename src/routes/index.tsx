@@ -164,12 +164,21 @@ function Header() {
 }
 
 function Hero() {
+  const [activeVideo, setActiveVideo] = useState(0);
+  const videos = [HERO_VIDEO_SRC, SECOND_HERO_VIDEO_SRC];
+
   return (
     <section id="video" className="bg-background">
       <div className="relative flex min-h-screen items-center justify-center overflow-hidden px-4">
-        <video className="hero-video" autoPlay loop muted playsInline>
-          <source src={HERO_VIDEO_SRC} type="video/mp4" />
-        </video>
+        <video
+          key={activeVideo}
+          className="hero-video"
+          src={videos[activeVideo]}
+          autoPlay
+          muted
+          playsInline
+          onEnded={() => setActiveVideo((current) => (current + 1) % videos.length)}
+        />
         <div className="hero-atmosphere" aria-hidden="true" />
         <div className="relative z-10 flex flex-col items-center text-center">
           <p className="mb-6 text-[10px] tracking-[0.5em] text-muted-foreground uppercase sm:text-xs">
@@ -184,22 +193,6 @@ function Hero() {
             Shoot. Edit. Grade.
           </p>
         </div>
-        <a
-          href="#video-two"
-          className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-[10px] tracking-[0.3em] text-muted-foreground uppercase"
-        >
-          Next video
-        </a>
-      </div>
-
-      <div id="video-two" className="relative flex min-h-screen items-end overflow-hidden">
-        <video className="hero-video" autoPlay loop muted playsInline>
-          <source src={SECOND_HERO_VIDEO_SRC} type="video/mp4" />
-        </video>
-        <div className="hero-atmosphere" aria-hidden="true" />
-        <p className="relative z-10 mb-10 ml-5 text-[10px] tracking-[0.35em] text-muted-foreground uppercase sm:mb-14 sm:ml-10">
-          Film 02
-        </p>
       </div>
     </section>
   );
