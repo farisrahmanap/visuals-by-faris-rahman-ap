@@ -34,6 +34,8 @@ import galleryTeaValley from "@/assets/gallery-tea-valley.jpg.asset.json";
 import galleryButterflyDisplay from "@/assets/gallery-butterfly-display.jpg.asset.json";
 import galleryStormyMountain from "@/assets/gallery-stormy-mountain.jpg.asset.json";
 import portraitFaris from "@/assets/portrait-faris.jpg.asset.json";
+import { Facebook, Instagram, Youtube } from "lucide-react";
+
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -175,7 +177,7 @@ function Hero() {
       <div className="relative flex min-h-screen items-center justify-center overflow-hidden px-4">
         <video
           key={activeVideo}
-          className="hero-video relative z-0"
+          className="hero-video"
           src={videos[activeVideo]}
           autoPlay
           muted={isMuted}
@@ -184,6 +186,7 @@ function Hero() {
           onVolumeChange={(e) => setIsMuted(e.currentTarget.muted)}
           onEnded={() => setActiveVideo((current) => (current + 1) % videos.length)}
         />
+
 
         <div className="hero-atmosphere" aria-hidden="true" />
         <div className="relative z-10 flex flex-col items-center text-center">
