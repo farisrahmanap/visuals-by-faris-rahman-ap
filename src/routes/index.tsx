@@ -385,14 +385,31 @@ function Index() {
       <Header />
       <main>
         <Hero />
-        <Portrait />
         <About />
         <Photos />
         <ColorGrading />
       </main>
-      <footer className="border-t border-border/60 px-5 py-10 text-center text-[10px] tracking-[0.3em] text-muted-foreground uppercase">
-        © {new Date().getFullYear()} Faris Rahman
+      <footer className="border-t border-border/60 px-5 py-10 text-center">
+        <ul className="mb-6 flex justify-center gap-8">
+          {CONNECT.map((c) => (
+            <li key={c.label}>
+              <a
+                href={c.href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={c.label}
+                className="connect-link"
+              >
+                <c.icon className="h-4 w-4" aria-hidden="true" />
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p className="text-[10px] tracking-[0.3em] text-muted-foreground uppercase">
+          © {new Date().getFullYear()} Faris Rahman
+        </p>
       </footer>
     </div>
   );
 }
+

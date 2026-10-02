@@ -410,3 +410,18 @@
   color: var(--color-muted-foreground);
   max-width: 36rem;
 }
+
+@utility connect-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-muted-foreground);
+  transition: color 0.3s ease;
+  &:hover {
+    color: var(--color-foreground);
+  }
+}
+
