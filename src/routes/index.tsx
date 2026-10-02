@@ -166,20 +166,25 @@ function Header() {
 
 function Hero() {
   const [activeVideo, setActiveVideo] = useState(0);
+  const [isMuted, setIsMuted] = useState(true);
   const videos = [SECOND_HERO_VIDEO_SRC, HERO_VIDEO_SRC];
+
 
   return (
     <section id="video" className="bg-background">
       <div className="relative flex min-h-screen items-center justify-center overflow-hidden px-4">
         <video
           key={activeVideo}
-          className="hero-video"
+          className="hero-video relative z-0"
           src={videos[activeVideo]}
           autoPlay
-          muted
+          muted={isMuted}
+          controls
           playsInline
+          onVolumeChange={(e) => setIsMuted(e.currentTarget.muted)}
           onEnded={() => setActiveVideo((current) => (current + 1) % videos.length)}
         />
+
         <div className="hero-atmosphere" aria-hidden="true" />
         <div className="relative z-10 flex flex-col items-center text-center">
           <p className="mb-6 text-[10px] tracking-[0.5em] text-muted-foreground uppercase sm:text-xs">
