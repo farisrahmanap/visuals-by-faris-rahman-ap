@@ -363,6 +363,7 @@ function Index() {
       <Header />
       <main>
         <Hero />
+        <Portrait />
         <About />
         <Photos />
         <ColorGrading />
