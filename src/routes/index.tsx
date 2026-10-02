@@ -33,6 +33,7 @@ import galleryTeaHillTrees from "@/assets/gallery-tea-hill-trees.jpg.asset.json"
 import galleryTeaValley from "@/assets/gallery-tea-valley.jpg.asset.json";
 import galleryButterflyDisplay from "@/assets/gallery-butterfly-display.jpg.asset.json";
 import galleryStormyMountain from "@/assets/gallery-stormy-mountain.jpg.asset.json";
+import portraitFaris from "@/assets/portrait-faris.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -165,7 +166,7 @@ function Header() {
 
 function Hero() {
   const [activeVideo, setActiveVideo] = useState(0);
-  const videos = [HERO_VIDEO_SRC, SECOND_HERO_VIDEO_SRC];
+  const videos = [SECOND_HERO_VIDEO_SRC, HERO_VIDEO_SRC];
 
   return (
     <section id="video" className="bg-background">
