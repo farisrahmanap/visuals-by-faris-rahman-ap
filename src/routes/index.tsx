@@ -34,6 +34,8 @@ import galleryTeaValley from "@/assets/gallery-tea-valley.jpg.asset.json";
 import galleryButterflyDisplay from "@/assets/gallery-butterfly-display.jpg.asset.json";
 import galleryStormyMountain from "@/assets/gallery-stormy-mountain.jpg.asset.json";
 import portraitFaris from "@/assets/portrait-faris.jpg.asset.json";
+import { Facebook, Instagram, Youtube } from "lucide-react";
+
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -125,6 +127,13 @@ const NAV = [
   { href: "#color-grading", label: "Color Grading" },
 ];
 
+const CONNECT = [
+  { label: "YouTube", href: "https://www.youtube.com/@farisrahmanap", icon: Youtube },
+  { label: "Facebook", href: "https://www.facebook.com/faris.rahman.ap/", icon: Facebook },
+  { label: "Instagram", href: "https://instagram.com/faris_rahman_ap", icon: Instagram },
+];
+
+
 function useReveal<T extends HTMLElement>() {
   const ref = useRef<T | null>(null);
   const [shown, setShown] = useState(false);
@@ -166,7 +175,9 @@ function Header() {
 
 function Hero() {
   const [activeVideo, setActiveVideo] = useState(0);
+  const [isMuted, setIsMuted] = useState(true);
   const videos = [SECOND_HERO_VIDEO_SRC, HERO_VIDEO_SRC];
+
 
   return (
     <section id="video" className="bg-background">
@@ -176,10 +187,14 @@ function Hero() {
           className="hero-video"
           src={videos[activeVideo]}
           autoPlay
-          muted
+          muted={isMuted}
+          controls
           playsInline
+          onVolumeChange={(e) => setIsMuted(e.currentTarget.muted)}
           onEnded={() => setActiveVideo((current) => (current + 1) % videos.length)}
         />
+
+
         <div className="hero-atmosphere" aria-hidden="true" />
         <div className="relative z-10 flex flex-col items-center text-center">
           <p className="mb-6 text-[10px] tracking-[0.5em] text-muted-foreground uppercase sm:text-xs">
@@ -199,28 +214,6 @@ function Hero() {
   );
 }
 
-function Portrait() {
-  const reveal = useReveal<HTMLDivElement>();
-  return (
-    <section className="bg-background px-5 pb-28 pt-8 sm:pb-40">
-      <div ref={reveal.ref} className={`${reveal.className} mx-auto max-w-6xl`}>
-        <figure className="mx-auto w-full max-w-sm">
-          <div className="overflow-hidden border border-border/60">
-            <img
-              src={portraitFaris.url}
-              alt="Portrait of Faris Rahman at golden hour"
-              loading="lazy"
-              className="aspect-[4/5] w-full object-cover"
-            />
-          </div>
-          <figcaption className="mt-6 text-center text-[10px] tracking-[0.4em] text-muted-foreground uppercase">
-            Faris Rahman
-          </figcaption>
-        </figure>
-      </div>
-    </section>
-  );
-}
 
 function Photos() {
   const reveal = useReveal<HTMLElement>();
@@ -326,30 +319,58 @@ function About() {
     >
       <div className="mx-auto max-w-6xl">
         <h2 className="section-title">About</h2>
-        <p className="bio-name mt-12 sm:mt-16">{BIO.name}</p>
-        <ul className="mt-6 flex flex-wrap gap-x-8 gap-y-3">
-          {BIO.roles.map((role) => (
-            <li key={role} className="bio-role">
-              {role}
-            </li>
-          ))}
-        </ul>
-        <div className="bio-grid mt-16 sm:mt-24">
+        <div className="mt-12 grid gap-12 sm:mt-16 md:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] md:gap-16">
+          <figure className="mx-auto w-full max-w-sm">
+            <div className="overflow-hidden border border-border/60">
+              <img
+                src={portraitFaris.url}
+                alt="Portrait of Faris Rahman at golden hour"
+                loading="lazy"
+                className="aspect-[4/5] w-full object-cover"
+              />
+            </div>
+            <figcaption className="mt-6 text-center text-[10px] tracking-[0.4em] text-muted-foreground uppercase">
+              Faris Rahman
+            </figcaption>
+          </figure>
           <div>
-            <p className="bio-label">Tools</p>
-            <ul className="mt-2">
-              {BIO.tools.map((tool) => (
-                <li key={tool} className="bio-item">
-                  {tool}
+            <p className="bio-name">{BIO.name}</p>
+            <ul className="mt-6 flex flex-wrap gap-x-8 gap-y-3">
+              {BIO.roles.map((role) => (
+                <li key={role} className="bio-role">
+                  {role}
                 </li>
               ))}
             </ul>
-          </div>
-          <div>
-            <p className="bio-label">Background</p>
-            <p className="bio-text mt-4">{BIO.background}</p>
-            <p className="bio-label mt-10">Involvement</p>
-            <p className="bio-text mt-4">{BIO.involvement}</p>
+            <div className="bio-grid mt-16 sm:mt-24">
+              <div>
+                <p className="bio-label">Tools</p>
+                <ul className="mt-2">
+                  {BIO.tools.map((tool) => (
+                    <li key={tool} className="bio-item">
+                      {tool}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <p className="bio-label">Background</p>
+                <p className="bio-text mt-4">{BIO.background}</p>
+                <p className="bio-label mt-10">Involvement</p>
+                <p className="bio-text mt-4">{BIO.involvement}</p>
+              </div>
+            </div>
+            <p className="bio-label mt-10">Connect</p>
+            <ul className="mt-4 flex flex-wrap gap-x-8 gap-y-3">
+              {CONNECT.map((c) => (
+                <li key={c.label}>
+                  <a href={c.href} target="_blank" rel="noreferrer" className="connect-link">
+                    <c.icon className="h-4 w-4" aria-hidden="true" />
+                    {c.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
@@ -357,20 +378,38 @@ function About() {
   );
 }
 
+
 function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Header />
       <main>
         <Hero />
-        <Portrait />
         <About />
         <Photos />
         <ColorGrading />
       </main>
-      <footer className="border-t border-border/60 px-5 py-10 text-center text-[10px] tracking-[0.3em] text-muted-foreground uppercase">
-        © {new Date().getFullYear()} Faris Rahman
+      <footer className="border-t border-border/60 px-5 py-10 text-center">
+        <ul className="mb-6 flex justify-center gap-8">
+          {CONNECT.map((c) => (
+            <li key={c.label}>
+              <a
+                href={c.href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={c.label}
+                className="connect-link"
+              >
+                <c.icon className="h-4 w-4" aria-hidden="true" />
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p className="text-[10px] tracking-[0.3em] text-muted-foreground uppercase">
+          © {new Date().getFullYear()} Faris Rahman
+        </p>
       </footer>
     </div>
   );
 }
+
