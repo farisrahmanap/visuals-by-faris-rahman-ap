@@ -33,6 +33,7 @@ import galleryTeaHillTrees from "@/assets/gallery-tea-hill-trees.jpg.asset.json"
 import galleryTeaValley from "@/assets/gallery-tea-valley.jpg.asset.json";
 import galleryButterflyDisplay from "@/assets/gallery-butterfly-display.jpg.asset.json";
 import galleryStormyMountain from "@/assets/gallery-stormy-mountain.jpg.asset.json";
+import portraitFaris from "@/assets/portrait-faris.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -165,7 +166,7 @@ function Header() {
 
 function Hero() {
   const [activeVideo, setActiveVideo] = useState(0);
-  const videos = [HERO_VIDEO_SRC, SECOND_HERO_VIDEO_SRC];
+  const videos = [SECOND_HERO_VIDEO_SRC, HERO_VIDEO_SRC];
 
   return (
     <section id="video" className="bg-background">
@@ -193,6 +194,29 @@ function Hero() {
             Shoot. Edit. Grade.
           </p>
         </div>
+      </div>
+    </section>
+  );
+}
+
+function Portrait() {
+  const reveal = useReveal<HTMLDivElement>();
+  return (
+    <section className="bg-background px-5 pb-28 pt-8 sm:pb-40">
+      <div ref={reveal.ref} className={`${reveal.className} mx-auto max-w-6xl`}>
+        <figure className="mx-auto w-full max-w-sm">
+          <div className="overflow-hidden border border-border/60">
+            <img
+              src={portraitFaris.url}
+              alt="Portrait of Faris Rahman at golden hour"
+              loading="lazy"
+              className="aspect-[4/5] w-full object-cover"
+            />
+          </div>
+          <figcaption className="mt-6 text-center text-[10px] tracking-[0.4em] text-muted-foreground uppercase">
+            Faris Rahman
+          </figcaption>
+        </figure>
       </div>
     </section>
   );
@@ -339,6 +363,7 @@ function Index() {
       <Header />
       <main>
         <Hero />
+        <Portrait />
         <About />
         <Photos />
         <ColorGrading />
