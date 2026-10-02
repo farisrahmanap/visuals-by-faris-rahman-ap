@@ -319,36 +319,65 @@ function About() {
     >
       <div className="mx-auto max-w-6xl">
         <h2 className="section-title">About</h2>
-        <p className="bio-name mt-12 sm:mt-16">{BIO.name}</p>
-        <ul className="mt-6 flex flex-wrap gap-x-8 gap-y-3">
-          {BIO.roles.map((role) => (
-            <li key={role} className="bio-role">
-              {role}
-            </li>
-          ))}
-        </ul>
-        <div className="bio-grid mt-16 sm:mt-24">
+        <div className="mt-12 grid gap-12 sm:mt-16 md:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] md:gap-16">
+          <figure className="mx-auto w-full max-w-sm">
+            <div className="overflow-hidden border border-border/60">
+              <img
+                src={portraitFaris.url}
+                alt="Portrait of Faris Rahman at golden hour"
+                loading="lazy"
+                className="aspect-[4/5] w-full object-cover"
+              />
+            </div>
+            <figcaption className="mt-6 text-center text-[10px] tracking-[0.4em] text-muted-foreground uppercase">
+              Faris Rahman
+            </figcaption>
+          </figure>
           <div>
-            <p className="bio-label">Tools</p>
-            <ul className="mt-2">
-              {BIO.tools.map((tool) => (
-                <li key={tool} className="bio-item">
-                  {tool}
+            <p className="bio-name">{BIO.name}</p>
+            <ul className="mt-6 flex flex-wrap gap-x-8 gap-y-3">
+              {BIO.roles.map((role) => (
+                <li key={role} className="bio-role">
+                  {role}
                 </li>
               ))}
             </ul>
-          </div>
-          <div>
-            <p className="bio-label">Background</p>
-            <p className="bio-text mt-4">{BIO.background}</p>
-            <p className="bio-label mt-10">Involvement</p>
-            <p className="bio-text mt-4">{BIO.involvement}</p>
+            <div className="bio-grid mt-16 sm:mt-24">
+              <div>
+                <p className="bio-label">Tools</p>
+                <ul className="mt-2">
+                  {BIO.tools.map((tool) => (
+                    <li key={tool} className="bio-item">
+                      {tool}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <p className="bio-label">Background</p>
+                <p className="bio-text mt-4">{BIO.background}</p>
+                <p className="bio-label mt-10">Involvement</p>
+                <p className="bio-text mt-4">{BIO.involvement}</p>
+              </div>
+            </div>
+            <p className="bio-label mt-10">Connect</p>
+            <ul className="mt-4 flex flex-wrap gap-x-8 gap-y-3">
+              {CONNECT.map((c) => (
+                <li key={c.label}>
+                  <a href={c.href} target="_blank" rel="noreferrer" className="connect-link">
+                    <c.icon className="h-4 w-4" aria-hidden="true" />
+                    {c.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
     </section>
   );
 }
+
 
 function Index() {
   return (
