@@ -397,6 +397,20 @@
   border-bottom: 1px solid var(--color-border);
 }
 
+/* Works / video players */
+@utility work-card {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: var(--color-card);
+}
+
+@utility work-video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 @utility bio-item {
   font-size: 0.875rem;
   color: var(--color-foreground);
