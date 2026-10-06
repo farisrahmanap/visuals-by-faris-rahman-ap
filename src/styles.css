@@ -409,6 +409,13 @@
   display: block;
   width: 100%;
   height: auto;
+  margin: 0 auto;
+}
+
+@utility work-video-portrait {
+  width: auto;
+  max-width: 100%;
+  max-height: 78vh;
 }
 
 @utility bio-item {

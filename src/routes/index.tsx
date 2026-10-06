@@ -176,9 +176,9 @@ function Header() {
 
 /* ---------- WORKS SHOWN AS SEPARATE PLAYERS BELOW THE HERO ---------- */
 const WORKS = [
-  { src: SECOND_HERO_VIDEO_SRC },
-  { src: HERO_VIDEO_SRC },
-];
+  { src: SECOND_HERO_VIDEO_SRC, orientation: "landscape" },
+  { src: HERO_VIDEO_SRC, orientation: "portrait" },
+] as const;
 
 function Hero() {
   const [activeVideo, setActiveVideo] = useState(0);
@@ -236,7 +236,7 @@ function Works() {
             <figure key={work.src} className="work-card">
               <video
                 src={work.src}
-                className="work-video"
+                className={`work-video${work.orientation === "portrait" ? " work-video-portrait" : ""}`}
                 controls
                 playsInline
                 preload="metadata"
