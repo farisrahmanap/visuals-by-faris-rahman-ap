@@ -122,6 +122,7 @@ const COLOR_GRADES = [
 
 const NAV = [
   { href: "#video", label: "Video" },
+  { href: "#works", label: "Works" },
   { href: "#about", label: "About" },
   { href: "#photos", label: "Photos" },
   { href: "#color-grading", label: "Color Grading" },
@@ -172,6 +173,12 @@ function Header() {
     </header>
   );
 }
+
+/* ---------- WORKS SHOWN AS SEPARATE PLAYERS BELOW THE HERO ---------- */
+const WORKS = [
+  { src: SECOND_HERO_VIDEO_SRC },
+  { src: HERO_VIDEO_SRC },
+];
 
 function Hero() {
   const [activeVideo, setActiveVideo] = useState(0);
