@@ -235,9 +235,9 @@ function Works() {
         <p className="mt-4 max-w-md text-sm text-muted-foreground">
           Selected films — press play and turn the sound on.
         </p>
-        <div className="mt-14 grid gap-12">
+        <div className="mt-14 grid items-start gap-8 sm:grid-cols-2 sm:gap-10 lg:gap-12">
           {WORKS.map((work, index) => (
-            <figure key={work.src} className="work-card">
+            <figure key={work.src} className="work-card min-w-0">
               <div className={`work-frame${work.orientation === "portrait" ? " work-frame-portrait" : ""}`}>
                 <video
                   src={work.src}
