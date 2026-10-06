@@ -234,14 +234,16 @@ function Works() {
         <div className="mt-14 grid gap-12">
           {WORKS.map((work, index) => (
             <figure key={work.src} className="work-card">
-              <video
-                src={work.src}
-                className={`work-video${work.orientation === "portrait" ? " work-video-portrait" : ""}`}
-                controls
-                playsInline
-                preload="metadata"
-                aria-label={`Portfolio film ${index + 1}`}
-              />
+              <div className={`work-frame${work.orientation === "portrait" ? " work-frame-portrait" : ""}`}>
+                <video
+                  src={work.src}
+                  className="work-video"
+                  controls
+                  playsInline
+                  preload="metadata"
+                  aria-label={`Portfolio film ${index + 1}`}
+                />
+              </div>
               <figcaption className="mt-4 text-[10px] tracking-[0.4em] text-muted-foreground uppercase">
                 Film {String(index + 1).padStart(2, "0")}
               </figcaption>
