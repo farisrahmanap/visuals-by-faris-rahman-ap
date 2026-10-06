@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from "react";
 
 import heroVideo from "@/assets/For_Portfolio.mp4.asset.json";
 import secondHeroVideo from "@/assets/0922_1.mp4.asset.json";
+import worksVideo1006 from "@/assets/1006.mp4.asset.json";
+import worksVideo1006_1 from "@/assets/1006_1.mp4.asset.json";
 import gradedStyle2 from "@/assets/graded-style-2.jpg.asset.json";
 import gradedStyle3 from "@/assets/graded-style-3.jpg.asset.json";
 import gradedStyle4 from "@/assets/graded-style-4.jpg.asset.json";
@@ -178,6 +180,8 @@ function Header() {
 const WORKS = [
   { src: SECOND_HERO_VIDEO_SRC, orientation: "landscape" },
   { src: HERO_VIDEO_SRC, orientation: "portrait" },
+  { src: worksVideo1006.url, orientation: "portrait" },
+  { src: worksVideo1006_1.url, orientation: "portrait" },
 ] as const;
 
 function Hero() {
