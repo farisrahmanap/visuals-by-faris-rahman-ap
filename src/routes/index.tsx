@@ -122,6 +122,7 @@ const COLOR_GRADES = [
 
 const NAV = [
   { href: "#video", label: "Video" },
+  { href: "#works", label: "Works" },
   { href: "#about", label: "About" },
   { href: "#photos", label: "Photos" },
   { href: "#color-grading", label: "Color Grading" },
@@ -173,6 +174,12 @@ function Header() {
   );
 }
 
+/* ---------- WORKS SHOWN AS SEPARATE PLAYERS BELOW THE HERO ---------- */
+const WORKS = [
+  { src: SECOND_HERO_VIDEO_SRC, orientation: "landscape" },
+  { src: HERO_VIDEO_SRC, orientation: "portrait" },
+] as const;
+
 function Hero() {
   const [activeVideo, setActiveVideo] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
@@ -214,6 +221,39 @@ function Hero() {
   );
 }
 
+
+function Works() {
+  const reveal = useReveal<HTMLElement>();
+  return (
+    <section id="works" ref={reveal.ref} className={`${reveal.className} bg-background px-5 py-28 sm:py-40`}>
+      <div className="mx-auto max-w-6xl">
+        <h2 className="section-title">Works</h2>
+        <p className="mt-4 max-w-md text-sm text-muted-foreground">
+          Selected films — press play and turn the sound on.
+        </p>
+        <div className="mt-14 grid gap-12">
+          {WORKS.map((work, index) => (
+            <figure key={work.src} className="work-card">
+              <div className={`work-frame${work.orientation === "portrait" ? " work-frame-portrait" : ""}`}>
+                <video
+                  src={work.src}
+                  className="work-video"
+                  controls
+                  playsInline
+                  preload="metadata"
+                  aria-label={`Portfolio film ${index + 1}`}
+                />
+              </div>
+              <figcaption className="mt-4 text-[10px] tracking-[0.4em] text-muted-foreground uppercase">
+                Film {String(index + 1).padStart(2, "0")}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function Photos() {
   const reveal = useReveal<HTMLElement>();
@@ -385,6 +425,7 @@ function Index() {
       <Header />
       <main>
         <Hero />
+        <Works />
         <About />
         <Photos />
         <ColorGrading />
