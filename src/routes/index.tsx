@@ -1,41 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 
-import heroVideo from "@/assets/For_Portfolio.mp4.asset.json";
-import secondHeroVideo from "@/assets/0922_1.mp4.asset.json";
-import worksVideo1006 from "@/assets/1006.mp4.asset.json";
-import worksVideo1006_1 from "@/assets/1006_1.mp4.asset.json";
-import gradedStyle2 from "@/assets/graded-style-2.jpg.asset.json";
-import gradedStyle3 from "@/assets/graded-style-3.jpg.asset.json";
-import gradedStyle4 from "@/assets/graded-style-4.jpg.asset.json";
-import gradedStyle5 from "@/assets/graded-style-5.jpg.asset.json";
-import gradedStyle6 from "@/assets/graded-style-6.jpg.asset.json";
-import rawStyle2 from "@/assets/raw-style-2.jpg.asset.json";
-import rawStyle3 from "@/assets/raw-style-3.jpg.asset.json";
-import rawStyle6 from "@/assets/raw-car-plantation.jpg.asset.json";
-import rawStyle4 from "@/assets/raw-hilltop-trees.jpg.asset.json";
-import rawStyle5 from "@/assets/raw-tea-valley.jpg.asset.json";
-import galleryLantern from "@/assets/gallery-lantern.jpg.asset.json";
-import galleryMountainSunset from "@/assets/gallery-mountain-sunset.jpg.asset.json";
-import galleryDomeCeiling from "@/assets/gallery-dome-ceiling.jpg.asset.json";
-import galleryMosqueInterior from "@/assets/gallery-mosque-interior.jpg.asset.json";
-import galleryHangingLamp from "@/assets/gallery-hanging-lamp.jpg.asset.json";
-import galleryMistyTeaHills from "@/assets/gallery-misty-tea-hills.jpg.asset.json";
-import galleryHumayunTomb from "@/assets/gallery-humayun-tomb.jpg.asset.json";
-import galleryIndiaGate from "@/assets/gallery-india-gate.jpg.asset.json";
-import galleryTajMahal from "@/assets/gallery-taj-mahal.jpg.asset.json";
-import galleryModernArchitecture from "@/assets/gallery-modern-architecture.jpg.asset.json";
-import galleryForestRoad from "@/assets/gallery-forest-road.jpg.asset.json";
-import galleryCloudyBuilding from "@/assets/gallery-cloudy-building.jpg.asset.json";
-import gallerySunsetBoat from "@/assets/gallery-sunset-boat.jpg.asset.json";
-import galleryShoreRocks from "@/assets/gallery-shore-rocks.jpg.asset.json";
-import galleryBeachShell from "@/assets/gallery-beach-shell.jpg.asset.json";
-import galleryShellInHand from "@/assets/gallery-shell-in-hand.jpg.asset.json";
-import galleryTeaHillTrees from "@/assets/gallery-tea-hill-trees.jpg.asset.json";
-import galleryTeaValley from "@/assets/gallery-tea-valley.jpg.asset.json";
-import galleryButterflyDisplay from "@/assets/gallery-butterfly-display.jpg.asset.json";
-import galleryStormyMountain from "@/assets/gallery-stormy-mountain.jpg.asset.json";
-import portraitFaris from "@/assets/portrait-faris.jpg.asset.json";
 import { Facebook, Instagram, Youtube } from "lucide-react";
 
 
@@ -61,9 +26,17 @@ export const Route = createFileRoute("/")({
   }),
 });
 
-/* ---------- SWAP YOUR REAL ASSETS HERE ---------- */
-const HERO_VIDEO_SRC = heroVideo.url;
-const SECOND_HERO_VIDEO_SRC = secondHeroVideo.url;
+/* ---------- MEDIA ---------- */
+// Small media ships inside the site (public/media) so any static host
+// (Vercel, Netlify, ...) serves it. The three largest videos exceed the
+// repository file limit, so they stream from the Lovable CDN instead.
+const CDN = "https://id-preview--f18c1145-efcc-4ab6-afba-3c42b1b480e6.lovable.app/__l5e/assets-v1";
+const HERO_VIDEO_SRC = `${CDN}/925b57d9-b977-43ab-8f12-a86478ed9759/For_Portfolio.mp4`;
+const SECOND_HERO_VIDEO_SRC = `${CDN}/3e354364-dc40-4d76-ac10-13d8af64b57c/0922_1.mp4`;
+const WORKS_VIDEO_1006_SRC = `${CDN}/1e484aff-e292-4f31-a18a-86a9a2832fa9/1006.mp4`;
+const WORKS_VIDEO_1006_1_SRC = "/media/1006_1.mp4";
+
+const media = (name: string) => `/media/${name}`;
 
 const PHOTOS = [
   { src: galleryLantern.url, alt: "Hanging lantern silhouetted against a mountain sunset" },
