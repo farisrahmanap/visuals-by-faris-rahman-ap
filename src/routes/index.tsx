@@ -340,7 +340,7 @@ function About() {
           <figure className="mx-auto w-full max-w-sm">
             <div className="overflow-hidden border border-border/60">
               <img
-                src={portraitFaris.url}
+                src={media("portrait-faris.jpg")}
                 alt="Portrait of Faris Rahman at golden hour"
                 loading="lazy"
                 className="aspect-[4/5] w-full object-cover"
