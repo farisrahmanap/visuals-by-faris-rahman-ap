@@ -160,21 +160,45 @@ function Header() {
 
 /* ---------- WORKS SHOWN AS SEPARATE PLAYERS BELOW THE HERO ---------- */
 const WORKS = [
-  { src: SECOND_HERO_VIDEO_SRC, orientation: "landscape" },
-  { src: HERO_VIDEO_SRC, orientation: "portrait" },
-  { src: WORKS_VIDEO_1006_SRC, orientation: "portrait" },
-  { src: WORKS_VIDEO_1006_1_SRC, orientation: "portrait" },
+  { src: SECOND_HERO_VIDEO_SRC, orientation: "landscape", title: "Showreel", category: "Film Edit · Color" },
+  { src: HERO_VIDEO_SRC, orientation: "portrait", title: "Portfolio Cut", category: "Vertical Edit · Color" },
+  { src: WORKS_VIDEO_1006_SRC, orientation: "portrait", title: "Frames in Motion", category: "Short-Form Edit" },
+  { src: WORKS_VIDEO_1006_1_SRC, orientation: "portrait", title: "Rhythm Study", category: "Short-Form Edit" },
 ] as const;
+
+const SERVICES = [
+  ["Feature Film & Short-Form Editing", "Story-first cuts with deliberate pacing, from long-form narratives to vertical reels."],
+  ["Cinematic Color Grading", "Mood-driven grades in DaVinci Resolve that give every frame a consistent emotional tone."],
+  ["Photography & Visual Storytelling", "Travel, landscape and portrait stills composed around light and atmosphere."],
+  ["Motion Design & Visual Finishing", "Titles, transitions and polish in After Effects to complete the final picture."],
+  ["Creative Direction", "Shaping the look, rhythm and feel of a project from first idea to final export."],
+] as const;
+
+function Lines({ lines, className = "" }: { lines: string[]; className?: string }) {
+  return (
+    <>
+      {lines.map((l, i) => (
+        <span key={l} className={`split-line ${className}`}>
+          <span style={{ transitionDelay: `${i * 110}ms` }}>{l}</span>
+        </span>
+      ))}
+    </>
+  );
+}
 
 function Hero() {
   const [activeVideo, setActiveVideo] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
+  const [ready, setReady] = useState(false);
   const videos = [SECOND_HERO_VIDEO_SRC, HERO_VIDEO_SRC];
-
+  useEffect(() => {
+    const t = requestAnimationFrame(() => setReady(true));
+    return () => cancelAnimationFrame(t);
+  }, []);
 
   return (
-    <section id="home" className="bg-background">
-      <div className="relative flex min-h-screen items-center justify-center overflow-hidden px-4">
+    <section id="home" className={`bg-background ${ready ? "is-visible" : ""}`}>
+      <div className="relative flex min-h-screen items-end overflow-hidden px-5 pt-28 pb-16 sm:pb-24">
         <video
           key={activeVideo}
           className="hero-video"
@@ -186,52 +210,91 @@ function Hero() {
           onVolumeChange={(e) => setIsMuted(e.currentTarget.muted)}
           onEnded={() => setActiveVideo((current) => (current + 1) % videos.length)}
         />
-
-
         <div className="hero-atmosphere" aria-hidden="true" />
-        <div className="relative z-10 flex flex-col items-center text-center">
-          <p className="mb-6 text-[10px] tracking-[0.5em] text-muted-foreground uppercase sm:text-xs">
-            Video Editor · Photographer
+        <div className="relative z-10 mx-auto w-full max-w-6xl">
+          <p className="eyebrow stagger" style={{ transitionDelay: "0ms" }}>
+            Faris Rahman — Video Editor · Photographer · Color Grader
           </p>
-          <h1 className="hero-title">
-            <span className="hero-title-primary">FARIS</span>
-            <span className="hero-title-secondary">RAHMAN</span>
+          <h1 className="display-title mt-6">
+            <Lines lines={["I don't just", "create content."]} />
+            <Lines lines={["I create feelings", "that last."]} className="text-accent-red" />
           </h1>
-          <span className="hero-divider" aria-hidden="true" />
-          <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed tracking-[0.25em] text-muted-foreground uppercase">
-            Shoot. Edit. Grade.
-          </p>
+          <div className="mt-10 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+            <p className="stagger max-w-md text-sm leading-relaxed text-muted-foreground sm:text-base" style={{ transitionDelay: "500ms" }}>
+              Every frame has a purpose. Every cut has a rhythm. Every story deserves to be felt.
+            </p>
+            <p className="stagger text-[10px] tracking-[0.4em] text-muted-foreground uppercase sm:text-xs" style={{ transitionDelay: "650ms" }}>
+              Shoot. Edit. Grade.
+            </p>
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
+function SectionHead({ index, title, sub }: { index: string; title: string; sub: string }) {
+  return (
+    <div className="flex flex-col gap-4 border-b border-border pb-8 sm:flex-row sm:items-end sm:justify-between">
+      <h2 className="section-title">
+        <span className="mr-4 align-top text-xs font-medium tracking-[0.3em] text-accent-red">{index}</span>
+        {title}
+      </h2>
+      <p className="max-w-sm text-sm text-muted-foreground">{sub}</p>
+    </div>
+  );
+}
+
+function Services() {
+  const reveal = useReveal<HTMLElement>();
+  return (
+    <section id="services" ref={reveal.ref} className={`${reveal.className} bg-background px-5 py-28 sm:py-40`}>
+      <div className="mx-auto max-w-6xl">
+        <SectionHead index="02" title="What I Do" sub="A complete visual pipeline — from the shoot to the final grade." />
+        <ol>
+          {SERVICES.map(([name, desc], i) => (
+            <li key={name} className="service-row stagger" style={{ transitionDelay: `${i * 90}ms` }}>
+              <span className="text-xs tracking-[0.3em] text-muted-foreground">{String(i + 1).padStart(2, "0")}</span>
+              <div>
+                <h3 className="service-name">{name}</h3>
+                <p className="mt-2 max-w-xl text-sm text-muted-foreground">{desc}</p>
+              </div>
+              <span className="service-arrow" aria-hidden="true">→</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
+}
 
 function Works() {
   const reveal = useReveal<HTMLElement>();
   return (
     <section id="works" ref={reveal.ref} className={`${reveal.className} bg-background px-5 py-28 sm:py-40`}>
       <div className="mx-auto max-w-6xl">
-        <h2 className="section-title">Works</h2>
-        <p className="mt-4 max-w-md text-sm text-muted-foreground">
-          Selected films — press play and turn the sound on.
-        </p>
+        <SectionHead index="04" title="Works" sub="Selected films — press play and turn the sound on." />
         <div className="mt-14 grid items-start gap-8 min-[560px]:grid-cols-2 sm:gap-10 lg:gap-12">
           {WORKS.map((work, index) => (
-            <figure key={work.src} className="work-card min-w-0">
+            <figure key={work.src} className="work-card stagger min-w-0" style={{ transitionDelay: `${index * 100}ms` }}>
               <div className={`work-frame${work.orientation === "portrait" ? " work-frame-portrait" : ""}`}>
                 <video
-                  src={work.src}
+                  src={`${work.src}#t=0.5`}
                   className="work-video"
                   controls
                   playsInline
                   preload="metadata"
-                  aria-label={`Portfolio film ${index + 1}`}
+                  aria-label={work.title}
                 />
               </div>
-              <figcaption className="mt-4 text-[10px] tracking-[0.4em] text-muted-foreground uppercase">
-                Film {String(index + 1).padStart(2, "0")}
+              <figcaption className="flex items-baseline justify-between gap-4 p-5">
+                <span>
+                  <span className="block text-[10px] tracking-[0.35em] text-accent-red uppercase">{work.category}</span>
+                  <span className="mt-2 block text-lg font-bold tracking-tight uppercase">{work.title}</span>
+                </span>
+                <span className="text-xs tracking-[0.3em] text-muted-foreground">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
               </figcaption>
             </figure>
           ))}
@@ -246,14 +309,15 @@ function Photos() {
   return (
     <section id="photos" ref={reveal.ref} className={`${reveal.className} bg-background px-5 py-28 sm:py-40`}>
       <div className="mx-auto max-w-6xl">
-        <h2 className="section-title">Photos</h2>
-        <p className="mt-4 max-w-md text-sm text-muted-foreground">
-          Selected stills — travel, portrait and available-light work.
-        </p>
+        <SectionHead index="03" title="Photos" sub="Selected stills — travel, architecture and available-light work." />
         <div className="masonry mt-14">
-          {PHOTOS.map((p) => (
-            <figure key={p.src} className="photo-card">
-              <img src={p.src} alt={p.alt} loading="lazy" />
+          {PHOTOS.map((p, i) => (
+            <figure key={p.src} className="photo-card stagger" style={{ transitionDelay: `${(i % 3) * 90}ms` }}>
+              <img src={p.src} alt={p.alt} loading="lazy" decoding="async" />
+              <figcaption className="photo-caption">
+                <span className="text-[10px] tracking-[0.3em] text-accent-red">{String(i + 1).padStart(2, "0")}</span>
+                <span className="text-sm font-semibold tracking-wide uppercase">{p.title}</span>
+              </figcaption>
             </figure>
           ))}
         </div>
