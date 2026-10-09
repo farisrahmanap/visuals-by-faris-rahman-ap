@@ -142,7 +142,7 @@ function Header() {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/60 backdrop-blur-xl">
       <nav className="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-4 sm:flex sm:justify-between">
         <a href="#home" className="truncate text-xs font-semibold tracking-[0.35em] uppercase">
-          Faris Rahman
+          Faris Rahman<span className="text-accent-red">.</span>
         </a>
         <ul className="flex shrink-0 items-center gap-4 text-[10px] tracking-[0.2em] uppercase sm:gap-8 sm:text-xs">
           {NAV.map((n) => (
@@ -335,7 +335,7 @@ function GradeComparison({
   const [value, setValue] = useState(55);
 
   return (
-    <figure className={`compare ${orientation === "landscape" ? "compare-landscape" : "compare-portrait"}`}>
+    <figure className={`compare stagger ${orientation === "landscape" ? "compare-landscape" : "compare-portrait"}`}>
       <img src={raw} alt={`RAW — ${alt}`} loading="lazy" className="compare-img raw" />
       <img
         src={graded}
@@ -369,10 +369,7 @@ function ColorGrading() {
       className={`${reveal.className} bg-background px-5 pb-32 sm:pb-44`}
     >
       <div className="mx-auto max-w-6xl">
-        <h2 className="section-title">Color Grading</h2>
-        <p className="mt-4 max-w-md text-sm text-muted-foreground">
-          Drag to compare the untouched capture with the final cinematic grade.
-        </p>
+        <SectionHead index="05" title="Color Grading" sub="Drag to compare the untouched capture with the final cinematic grade." />
 
         <div className="grade-grid mt-14">
           {COLOR_GRADES.map((comparison) => (
@@ -408,7 +405,7 @@ function About() {
       className={`${reveal.className} bg-background px-5 py-28 sm:py-40`}
     >
       <div className="mx-auto max-w-6xl">
-        <h2 className="section-title">About</h2>
+        <SectionHead index="01" title="About" sub="Video editor, photographer and color grader based in Kerala." />
         <div className="mt-12 grid gap-12 sm:mt-16 md:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] md:gap-16">
           <figure className="mx-auto w-full max-w-sm">
             <div className="overflow-hidden border border-border/60">
@@ -476,6 +473,7 @@ function Index() {
       <main>
         <Hero />
         <About />
+        <Services />
         <Photos />
         <Works />
         <ColorGrading />
