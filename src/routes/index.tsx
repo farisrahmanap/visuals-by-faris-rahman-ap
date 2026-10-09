@@ -1,41 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 
-import heroVideo from "@/assets/For_Portfolio.mp4.asset.json";
-import secondHeroVideo from "@/assets/0922_1.mp4.asset.json";
-import worksVideo1006 from "@/assets/1006.mp4.asset.json";
-import worksVideo1006_1 from "@/assets/1006_1.mp4.asset.json";
-import gradedStyle2 from "@/assets/graded-style-2.jpg.asset.json";
-import gradedStyle3 from "@/assets/graded-style-3.jpg.asset.json";
-import gradedStyle4 from "@/assets/graded-style-4.jpg.asset.json";
-import gradedStyle5 from "@/assets/graded-style-5.jpg.asset.json";
-import gradedStyle6 from "@/assets/graded-style-6.jpg.asset.json";
-import rawStyle2 from "@/assets/raw-style-2.jpg.asset.json";
-import rawStyle3 from "@/assets/raw-style-3.jpg.asset.json";
-import rawStyle6 from "@/assets/raw-car-plantation.jpg.asset.json";
-import rawStyle4 from "@/assets/raw-hilltop-trees.jpg.asset.json";
-import rawStyle5 from "@/assets/raw-tea-valley.jpg.asset.json";
-import galleryLantern from "@/assets/gallery-lantern.jpg.asset.json";
-import galleryMountainSunset from "@/assets/gallery-mountain-sunset.jpg.asset.json";
-import galleryDomeCeiling from "@/assets/gallery-dome-ceiling.jpg.asset.json";
-import galleryMosqueInterior from "@/assets/gallery-mosque-interior.jpg.asset.json";
-import galleryHangingLamp from "@/assets/gallery-hanging-lamp.jpg.asset.json";
-import galleryMistyTeaHills from "@/assets/gallery-misty-tea-hills.jpg.asset.json";
-import galleryHumayunTomb from "@/assets/gallery-humayun-tomb.jpg.asset.json";
-import galleryIndiaGate from "@/assets/gallery-india-gate.jpg.asset.json";
-import galleryTajMahal from "@/assets/gallery-taj-mahal.jpg.asset.json";
-import galleryModernArchitecture from "@/assets/gallery-modern-architecture.jpg.asset.json";
-import galleryForestRoad from "@/assets/gallery-forest-road.jpg.asset.json";
-import galleryCloudyBuilding from "@/assets/gallery-cloudy-building.jpg.asset.json";
-import gallerySunsetBoat from "@/assets/gallery-sunset-boat.jpg.asset.json";
-import galleryShoreRocks from "@/assets/gallery-shore-rocks.jpg.asset.json";
-import galleryBeachShell from "@/assets/gallery-beach-shell.jpg.asset.json";
-import galleryShellInHand from "@/assets/gallery-shell-in-hand.jpg.asset.json";
-import galleryTeaHillTrees from "@/assets/gallery-tea-hill-trees.jpg.asset.json";
-import galleryTeaValley from "@/assets/gallery-tea-valley.jpg.asset.json";
-import galleryButterflyDisplay from "@/assets/gallery-butterfly-display.jpg.asset.json";
-import galleryStormyMountain from "@/assets/gallery-stormy-mountain.jpg.asset.json";
-import portraitFaris from "@/assets/portrait-faris.jpg.asset.json";
 import { Facebook, Instagram, Youtube } from "lucide-react";
 
 
@@ -61,61 +26,69 @@ export const Route = createFileRoute("/")({
   }),
 });
 
-/* ---------- SWAP YOUR REAL ASSETS HERE ---------- */
-const HERO_VIDEO_SRC = heroVideo.url;
-const SECOND_HERO_VIDEO_SRC = secondHeroVideo.url;
+/* ---------- MEDIA ---------- */
+// Small media ships inside the site (public/media) so any static host
+// (Vercel, Netlify, ...) serves it. The three largest videos exceed the
+// repository file limit, so they stream from the Lovable CDN instead.
+const CDN = "https://id-preview--f18c1145-efcc-4ab6-afba-3c42b1b480e6.lovable.app/__l5e/assets-v1";
+const HERO_VIDEO_SRC = `${CDN}/925b57d9-b977-43ab-8f12-a86478ed9759/For_Portfolio.mp4`;
+const SECOND_HERO_VIDEO_SRC = `${CDN}/3e354364-dc40-4d76-ac10-13d8af64b57c/0922_1.mp4`;
+const WORKS_VIDEO_1006_SRC = `${CDN}/1e484aff-e292-4f31-a18a-86a9a2832fa9/1006.mp4`;
+const WORKS_VIDEO_1006_1_SRC = "/media/1006_1.mp4";
+
+const media = (name: string) => `/media/${name}`;
 
 const PHOTOS = [
-  { src: galleryLantern.url, alt: "Hanging lantern silhouetted against a mountain sunset" },
-  { src: galleryMountainSunset.url, alt: "Layered mountain landscape beneath a dramatic sunset sky" },
-  { src: galleryDomeCeiling.url, alt: "Symmetrical ornamental dome and ceiling viewed from below" },
-  { src: galleryMosqueInterior.url, alt: "Grand mosque interior with decorated columns and dome" },
-  { src: galleryHangingLamp.url, alt: "Mosaic hanging lamp beneath an ornate dome" },
-  { src: galleryMistyTeaHills.url, alt: "Misty green tea plantation rolling across the hills" },
-  { src: galleryHumayunTomb.url, alt: "Humayun's Tomb entrance beneath a clear blue sky" },
-  { src: galleryIndiaGate.url, alt: "India Gate framed by a broad cloud-filled sky" },
-  { src: galleryTajMahal.url, alt: "Taj Mahal framed by trees and gardens" },
-  { src: galleryModernArchitecture.url, alt: "Modern angular building reflecting an evening sky" },
-  { src: galleryForestRoad.url, alt: "Rain-soaked forest road with reflections in muddy puddles" },
-  { src: galleryCloudyBuilding.url, alt: "Palm-framed building beneath a dramatic cloudy sky" },
-  { src: gallerySunsetBoat.url, alt: "Fishing boat crossing the water beneath a hazy sunset" },
-  { src: galleryShoreRocks.url, alt: "Sea washing between moss-covered boulders on the beach" },
-  { src: galleryBeachShell.url, alt: "Seashell resting on sand beside the ocean" },
-  { src: galleryShellInHand.url, alt: "Seashell held against a coastal shoreline" },
-  { src: galleryTeaHillTrees.url, alt: "Cluster of trees on a sunlit tea plantation hill" },
-  { src: galleryTeaValley.url, alt: "Rolling tea fields and distant mountains in morning light" },
-  { src: galleryButterflyDisplay.url, alt: "Pink butterfly display inside a shopping gallery" },
-  { src: galleryStormyMountain.url, alt: "Storm clouds breaking over a mountain valley at sunset" },
+  { src: media("gallery-lantern.jpg"), alt: "Hanging lantern silhouetted against a mountain sunset" },
+  { src: media("gallery-mountain-sunset.jpg"), alt: "Layered mountain landscape beneath a dramatic sunset sky" },
+  { src: media("gallery-dome-ceiling.jpg"), alt: "Symmetrical ornamental dome and ceiling viewed from below" },
+  { src: media("gallery-mosque-interior.jpg"), alt: "Grand mosque interior with decorated columns and dome" },
+  { src: media("gallery-hanging-lamp.jpg"), alt: "Mosaic hanging lamp beneath an ornate dome" },
+  { src: media("gallery-misty-tea-hills.jpg"), alt: "Misty green tea plantation rolling across the hills" },
+  { src: media("gallery-humayun-tomb.jpg"), alt: "Humayun's Tomb entrance beneath a clear blue sky" },
+  { src: media("gallery-india-gate.jpg"), alt: "India Gate framed by a broad cloud-filled sky" },
+  { src: media("gallery-taj-mahal.jpg"), alt: "Taj Mahal framed by trees and gardens" },
+  { src: media("gallery-modern-architecture.jpg"), alt: "Modern angular building reflecting an evening sky" },
+  { src: media("gallery-forest-road.jpg"), alt: "Rain-soaked forest road with reflections in muddy puddles" },
+  { src: media("gallery-cloudy-building.jpg"), alt: "Palm-framed building beneath a dramatic cloudy sky" },
+  { src: media("gallery-sunset-boat.jpg"), alt: "Fishing boat crossing the water beneath a hazy sunset" },
+  { src: media("gallery-shore-rocks.jpg"), alt: "Sea washing between moss-covered boulders on the beach" },
+  { src: media("gallery-beach-shell.jpg"), alt: "Seashell resting on sand beside the ocean" },
+  { src: media("gallery-shell-in-hand.jpg"), alt: "Seashell held against a coastal shoreline" },
+  { src: media("gallery-tea-hill-trees.jpg"), alt: "Cluster of trees on a sunlit tea plantation hill" },
+  { src: media("gallery-tea-valley.jpg"), alt: "Rolling tea fields and distant mountains in morning light" },
+  { src: media("gallery-butterfly-display.jpg"), alt: "Pink butterfly display inside a shopping gallery" },
+  { src: media("gallery-stormy-mountain.jpg"), alt: "Storm clouds breaking over a mountain valley at sunset" },
 ];
 
 const COLOR_GRADES = [
   {
-    raw: rawStyle2.url,
-    graded: gradedStyle2.url,
+    raw: media("raw-style-2.jpg"),
+    graded: media("graded-style-2.jpg"),
     alt: "Mountain swing overlooking misty hills",
     orientation: "portrait",
   },
   {
-    raw: rawStyle3.url,
-    graded: gradedStyle3.url,
+    raw: media("raw-style-3.jpg"),
+    graded: media("graded-style-3.jpg"),
     alt: "Illuminated observation wheel at dusk",
     orientation: "portrait",
   },
   {
-    raw: rawStyle4.url,
-    graded: gradedStyle4.url,
+    raw: media("raw-hilltop-trees.jpg"),
+    graded: media("graded-style-4.jpg"),
     alt: "Tea plantation and hilltop trees",
     orientation: "portrait",
   },
   {
-    raw: rawStyle5.url,
-    graded: gradedStyle5.url,
+    raw: media("raw-tea-valley.jpg"),
+    graded: media("graded-style-5.jpg"),
     alt: "Tea-covered hills beneath mountain peaks",
     orientation: "landscape",
   },
   {
-    raw: rawStyle6.url,
-    graded: gradedStyle6.url,
+    raw: media("raw-car-plantation.jpg"),
+    graded: media("graded-style-6.jpg"),
     alt: "Car beside a mountain tea plantation",
     orientation: "portrait",
   },
@@ -180,8 +153,8 @@ function Header() {
 const WORKS = [
   { src: SECOND_HERO_VIDEO_SRC, orientation: "landscape" },
   { src: HERO_VIDEO_SRC, orientation: "portrait" },
-  { src: worksVideo1006.url, orientation: "portrait" },
-  { src: worksVideo1006_1.url, orientation: "portrait" },
+  { src: WORKS_VIDEO_1006_SRC, orientation: "portrait" },
+  { src: WORKS_VIDEO_1006_1_SRC, orientation: "portrait" },
 ] as const;
 
 function Hero() {
@@ -367,7 +340,7 @@ function About() {
           <figure className="mx-auto w-full max-w-sm">
             <div className="overflow-hidden border border-border/60">
               <img
-                src={portraitFaris.url}
+                src={media("portrait-faris.jpg")}
                 alt="Portrait of Faris Rahman at golden hour"
                 loading="lazy"
                 className="aspect-[4/5] w-full object-cover"
