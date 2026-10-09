@@ -39,26 +39,26 @@ const WORKS_VIDEO_1006_1_SRC = "/media/1006_1.mp4";
 const media = (name: string) => `/media/${name}`;
 
 const PHOTOS = [
-  { src: media("gallery-lantern.jpg"), alt: "Hanging lantern silhouetted against a mountain sunset" },
-  { src: media("gallery-mountain-sunset.jpg"), alt: "Layered mountain landscape beneath a dramatic sunset sky" },
-  { src: media("gallery-dome-ceiling.jpg"), alt: "Symmetrical ornamental dome and ceiling viewed from below" },
-  { src: media("gallery-mosque-interior.jpg"), alt: "Grand mosque interior with decorated columns and dome" },
-  { src: media("gallery-hanging-lamp.jpg"), alt: "Mosaic hanging lamp beneath an ornate dome" },
-  { src: media("gallery-misty-tea-hills.jpg"), alt: "Misty green tea plantation rolling across the hills" },
-  { src: media("gallery-humayun-tomb.jpg"), alt: "Humayun's Tomb entrance beneath a clear blue sky" },
-  { src: media("gallery-india-gate.jpg"), alt: "India Gate framed by a broad cloud-filled sky" },
-  { src: media("gallery-taj-mahal.jpg"), alt: "Taj Mahal framed by trees and gardens" },
-  { src: media("gallery-modern-architecture.jpg"), alt: "Modern angular building reflecting an evening sky" },
-  { src: media("gallery-forest-road.jpg"), alt: "Rain-soaked forest road with reflections in muddy puddles" },
-  { src: media("gallery-cloudy-building.jpg"), alt: "Palm-framed building beneath a dramatic cloudy sky" },
-  { src: media("gallery-sunset-boat.jpg"), alt: "Fishing boat crossing the water beneath a hazy sunset" },
-  { src: media("gallery-shore-rocks.jpg"), alt: "Sea washing between moss-covered boulders on the beach" },
-  { src: media("gallery-beach-shell.jpg"), alt: "Seashell resting on sand beside the ocean" },
-  { src: media("gallery-shell-in-hand.jpg"), alt: "Seashell held against a coastal shoreline" },
-  { src: media("gallery-tea-hill-trees.jpg"), alt: "Cluster of trees on a sunlit tea plantation hill" },
-  { src: media("gallery-tea-valley.jpg"), alt: "Rolling tea fields and distant mountains in morning light" },
-  { src: media("gallery-butterfly-display.jpg"), alt: "Pink butterfly display inside a shopping gallery" },
-  { src: media("gallery-stormy-mountain.jpg"), alt: "Storm clouds breaking over a mountain valley at sunset" },
+  { title: "Lantern at Dusk", src: media("gallery-lantern.jpg"), alt: "Hanging lantern silhouetted against a mountain sunset" },
+  { title: "Ridges on Fire", src: media("gallery-mountain-sunset.jpg"), alt: "Layered mountain landscape beneath a dramatic sunset sky" },
+  { title: "The Inner Dome", src: media("gallery-dome-ceiling.jpg"), alt: "Symmetrical ornamental dome and ceiling viewed from below" },
+  { title: "Hall of Columns", src: media("gallery-mosque-interior.jpg"), alt: "Grand mosque interior with decorated columns and dome" },
+  { title: "Mosaic Light", src: media("gallery-hanging-lamp.jpg"), alt: "Mosaic hanging lamp beneath an ornate dome" },
+  { title: "Mist Over Tea", src: media("gallery-misty-tea-hills.jpg"), alt: "Misty green tea plantation rolling across the hills" },
+  { title: "Gate of Humayun", src: media("gallery-humayun-tomb.jpg"), alt: "Humayun's Tomb entrance beneath a clear blue sky" },
+  { title: "Under the Arch", src: media("gallery-india-gate.jpg"), alt: "India Gate framed by a broad cloud-filled sky" },
+  { title: "Marble Elegy", src: media("gallery-taj-mahal.jpg"), alt: "Taj Mahal framed by trees and gardens" },
+  { title: "Glass Evening", src: media("gallery-modern-architecture.jpg"), alt: "Modern angular building reflecting an evening sky" },
+  { title: "After the Rain", src: media("gallery-forest-road.jpg"), alt: "Rain-soaked forest road with reflections in muddy puddles" },
+  { title: "Palms and Thunder", src: media("gallery-cloudy-building.jpg"), alt: "Palm-framed building beneath a dramatic cloudy sky" },
+  { title: "Last Boat Home", src: media("gallery-sunset-boat.jpg"), alt: "Fishing boat crossing the water beneath a hazy sunset" },
+  { title: "Stone and Tide", src: media("gallery-shore-rocks.jpg"), alt: "Sea washing between moss-covered boulders on the beach" },
+  { title: "Shell on Sand", src: media("gallery-beach-shell.jpg"), alt: "Seashell resting on sand beside the ocean" },
+  { title: "Held by the Sea", src: media("gallery-shell-in-hand.jpg"), alt: "Seashell held against a coastal shoreline" },
+  { title: "Hilltop Sentinels", src: media("gallery-tea-hill-trees.jpg"), alt: "Cluster of trees on a sunlit tea plantation hill" },
+  { title: "Morning Valley", src: media("gallery-tea-valley.jpg"), alt: "Rolling tea fields and distant mountains in morning light" },
+  { title: "Pink Wings", src: media("gallery-butterfly-display.jpg"), alt: "Pink butterfly display inside a shopping gallery" },
+  { title: "Storm Breaks", src: media("gallery-stormy-mountain.jpg"), alt: "Storm clouds breaking over a mountain valley at sunset" },
 ];
 
 const COLOR_GRADES = [
@@ -142,7 +142,7 @@ function Header() {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/60 backdrop-blur-xl">
       <nav className="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-4 sm:flex sm:justify-between">
         <a href="#home" className="truncate text-xs font-semibold tracking-[0.35em] uppercase">
-          Faris Rahman
+          Faris Rahman<span className="text-accent-red">.</span>
         </a>
         <ul className="flex shrink-0 items-center gap-4 text-[10px] tracking-[0.2em] uppercase sm:gap-8 sm:text-xs">
           {NAV.map((n) => (
@@ -160,21 +160,45 @@ function Header() {
 
 /* ---------- WORKS SHOWN AS SEPARATE PLAYERS BELOW THE HERO ---------- */
 const WORKS = [
-  { src: SECOND_HERO_VIDEO_SRC, orientation: "landscape" },
-  { src: HERO_VIDEO_SRC, orientation: "portrait" },
-  { src: WORKS_VIDEO_1006_SRC, orientation: "portrait" },
-  { src: WORKS_VIDEO_1006_1_SRC, orientation: "portrait" },
+  { src: SECOND_HERO_VIDEO_SRC, orientation: "landscape", title: "Showreel", category: "Film Edit · Color" },
+  { src: HERO_VIDEO_SRC, orientation: "portrait", title: "Portfolio Cut", category: "Vertical Edit · Color" },
+  { src: WORKS_VIDEO_1006_SRC, orientation: "portrait", title: "Frames in Motion", category: "Short-Form Edit" },
+  { src: WORKS_VIDEO_1006_1_SRC, orientation: "portrait", title: "Rhythm Study", category: "Short-Form Edit" },
 ] as const;
+
+const SERVICES = [
+  ["Feature Film & Short-Form Editing", "Story-first cuts with deliberate pacing, from long-form narratives to vertical reels."],
+  ["Cinematic Color Grading", "Mood-driven grades in DaVinci Resolve that give every frame a consistent emotional tone."],
+  ["Photography & Visual Storytelling", "Travel, landscape and portrait stills composed around light and atmosphere."],
+  ["Motion Design & Visual Finishing", "Titles, transitions and polish in After Effects to complete the final picture."],
+  ["Creative Direction", "Shaping the look, rhythm and feel of a project from first idea to final export."],
+] as const;
+
+function Lines({ lines, className = "" }: { lines: string[]; className?: string }) {
+  return (
+    <>
+      {lines.map((l, i) => (
+        <span key={l} className={`split-line ${className}`}>
+          <span style={{ transitionDelay: `${i * 110}ms` }}>{l}</span>
+        </span>
+      ))}
+    </>
+  );
+}
 
 function Hero() {
   const [activeVideo, setActiveVideo] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
+  const [ready, setReady] = useState(false);
   const videos = [SECOND_HERO_VIDEO_SRC, HERO_VIDEO_SRC];
-
+  useEffect(() => {
+    const t = requestAnimationFrame(() => setReady(true));
+    return () => cancelAnimationFrame(t);
+  }, []);
 
   return (
-    <section id="home" className="bg-background">
-      <div className="relative flex min-h-screen items-center justify-center overflow-hidden px-4">
+    <section id="home" className={`bg-background ${ready ? "is-visible" : ""}`}>
+      <div className="relative flex min-h-screen items-end overflow-hidden px-5 pt-28 pb-16 sm:pb-24">
         <video
           key={activeVideo}
           className="hero-video"
@@ -186,52 +210,91 @@ function Hero() {
           onVolumeChange={(e) => setIsMuted(e.currentTarget.muted)}
           onEnded={() => setActiveVideo((current) => (current + 1) % videos.length)}
         />
-
-
         <div className="hero-atmosphere" aria-hidden="true" />
-        <div className="relative z-10 flex flex-col items-center text-center">
-          <p className="mb-6 text-[10px] tracking-[0.5em] text-muted-foreground uppercase sm:text-xs">
-            Video Editor · Photographer
+        <div className="relative z-10 mx-auto w-full max-w-6xl">
+          <p className="eyebrow stagger" style={{ transitionDelay: "0ms" }}>
+            Faris Rahman — Video Editor · Photographer · Color Grader
           </p>
-          <h1 className="hero-title">
-            <span className="hero-title-primary">FARIS</span>
-            <span className="hero-title-secondary">RAHMAN</span>
+          <h1 className="display-title mt-6">
+            <Lines lines={["I don't just", "create content."]} />
+            <Lines lines={["I create feelings", "that last."]} className="text-accent-red" />
           </h1>
-          <span className="hero-divider" aria-hidden="true" />
-          <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed tracking-[0.25em] text-muted-foreground uppercase">
-            Shoot. Edit. Grade.
-          </p>
+          <div className="mt-10 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+            <p className="stagger max-w-md text-sm leading-relaxed text-muted-foreground sm:text-base" style={{ transitionDelay: "500ms" }}>
+              Every frame has a purpose. Every cut has a rhythm. Every story deserves to be felt.
+            </p>
+            <p className="stagger text-[10px] tracking-[0.4em] text-muted-foreground uppercase sm:text-xs" style={{ transitionDelay: "650ms" }}>
+              Shoot. Edit. Grade.
+            </p>
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
+function SectionHead({ index, title, sub }: { index: string; title: string; sub: string }) {
+  return (
+    <div className="flex flex-col gap-4 border-b border-border pb-8 sm:flex-row sm:items-end sm:justify-between">
+      <h2 className="section-title">
+        <span className="mr-4 align-top text-xs font-medium tracking-[0.3em] text-accent-red">{index}</span>
+        {title}
+      </h2>
+      <p className="max-w-sm text-sm text-muted-foreground">{sub}</p>
+    </div>
+  );
+}
+
+function Services() {
+  const reveal = useReveal<HTMLElement>();
+  return (
+    <section id="services" ref={reveal.ref} className={`${reveal.className} bg-background px-5 py-28 sm:py-40`}>
+      <div className="mx-auto max-w-6xl">
+        <SectionHead index="02" title="What I Do" sub="A complete visual pipeline — from the shoot to the final grade." />
+        <ol>
+          {SERVICES.map(([name, desc], i) => (
+            <li key={name} className="service-row stagger" style={{ transitionDelay: `${i * 90}ms` }}>
+              <span className="text-xs tracking-[0.3em] text-muted-foreground">{String(i + 1).padStart(2, "0")}</span>
+              <div>
+                <h3 className="service-name">{name}</h3>
+                <p className="mt-2 max-w-xl text-sm text-muted-foreground">{desc}</p>
+              </div>
+              <span className="service-arrow" aria-hidden="true">→</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
+}
 
 function Works() {
   const reveal = useReveal<HTMLElement>();
   return (
     <section id="works" ref={reveal.ref} className={`${reveal.className} bg-background px-5 py-28 sm:py-40`}>
       <div className="mx-auto max-w-6xl">
-        <h2 className="section-title">Works</h2>
-        <p className="mt-4 max-w-md text-sm text-muted-foreground">
-          Selected films — press play and turn the sound on.
-        </p>
+        <SectionHead index="04" title="Works" sub="Selected films — press play and turn the sound on." />
         <div className="mt-14 grid items-start gap-8 min-[560px]:grid-cols-2 sm:gap-10 lg:gap-12">
           {WORKS.map((work, index) => (
-            <figure key={work.src} className="work-card min-w-0">
+            <figure key={work.src} className="work-card stagger min-w-0" style={{ transitionDelay: `${index * 100}ms` }}>
               <div className={`work-frame${work.orientation === "portrait" ? " work-frame-portrait" : ""}`}>
                 <video
-                  src={work.src}
+                  src={`${work.src}#t=0.5`}
                   className="work-video"
                   controls
                   playsInline
                   preload="metadata"
-                  aria-label={`Portfolio film ${index + 1}`}
+                  aria-label={work.title}
                 />
               </div>
-              <figcaption className="mt-4 text-[10px] tracking-[0.4em] text-muted-foreground uppercase">
-                Film {String(index + 1).padStart(2, "0")}
+              <figcaption className="flex items-baseline justify-between gap-4 p-5">
+                <span>
+                  <span className="block text-[10px] tracking-[0.35em] text-accent-red uppercase">{work.category}</span>
+                  <span className="mt-2 block text-lg font-bold tracking-tight uppercase">{work.title}</span>
+                </span>
+                <span className="text-xs tracking-[0.3em] text-muted-foreground">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
               </figcaption>
             </figure>
           ))}
@@ -246,14 +309,15 @@ function Photos() {
   return (
     <section id="photos" ref={reveal.ref} className={`${reveal.className} bg-background px-5 py-28 sm:py-40`}>
       <div className="mx-auto max-w-6xl">
-        <h2 className="section-title">Photos</h2>
-        <p className="mt-4 max-w-md text-sm text-muted-foreground">
-          Selected stills — travel, portrait and available-light work.
-        </p>
+        <SectionHead index="03" title="Photos" sub="Selected stills — travel, architecture and available-light work." />
         <div className="masonry mt-14">
-          {PHOTOS.map((p) => (
-            <figure key={p.src} className="photo-card">
-              <img src={p.src} alt={p.alt} loading="lazy" />
+          {PHOTOS.map((p, i) => (
+            <figure key={p.src} className="photo-card stagger" style={{ transitionDelay: `${(i % 3) * 90}ms` }}>
+              <img src={p.src} alt={p.alt} loading="lazy" decoding="async" />
+              <figcaption className="photo-caption">
+                <span className="text-[10px] tracking-[0.3em] text-accent-red">{String(i + 1).padStart(2, "0")}</span>
+                <span className="text-sm font-semibold tracking-wide uppercase">{p.title}</span>
+              </figcaption>
             </figure>
           ))}
         </div>
@@ -271,7 +335,7 @@ function GradeComparison({
   const [value, setValue] = useState(55);
 
   return (
-    <figure className={`compare ${orientation === "landscape" ? "compare-landscape" : "compare-portrait"}`}>
+    <figure className={`compare stagger ${orientation === "landscape" ? "compare-landscape" : "compare-portrait"}`}>
       <img src={raw} alt={`RAW — ${alt}`} loading="lazy" className="compare-img raw" />
       <img
         src={graded}
@@ -305,10 +369,7 @@ function ColorGrading() {
       className={`${reveal.className} bg-background px-5 pb-32 sm:pb-44`}
     >
       <div className="mx-auto max-w-6xl">
-        <h2 className="section-title">Color Grading</h2>
-        <p className="mt-4 max-w-md text-sm text-muted-foreground">
-          Drag to compare the untouched capture with the final cinematic grade.
-        </p>
+        <SectionHead index="05" title="Color Grading" sub="Drag to compare the untouched capture with the final cinematic grade." />
 
         <div className="grade-grid mt-14">
           {COLOR_GRADES.map((comparison) => (
@@ -344,7 +405,7 @@ function About() {
       className={`${reveal.className} bg-background px-5 py-28 sm:py-40`}
     >
       <div className="mx-auto max-w-6xl">
-        <h2 className="section-title">About</h2>
+        <SectionHead index="01" title="About" sub="Video editor, photographer and color grader based in Kerala." />
         <div className="mt-12 grid gap-12 sm:mt-16 md:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] md:gap-16">
           <figure className="mx-auto w-full max-w-sm">
             <div className="overflow-hidden border border-border/60">
@@ -412,6 +473,7 @@ function Index() {
       <main>
         <Hero />
         <About />
+        <Services />
         <Photos />
         <Works />
         <ColorGrading />
