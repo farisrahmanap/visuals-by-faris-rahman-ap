@@ -35,6 +35,8 @@ const HERO_VIDEO_SRC = `${CDN}/925b57d9-b977-43ab-8f12-a86478ed9759/For_Portfoli
 const SECOND_HERO_VIDEO_SRC = `${CDN}/3e354364-dc40-4d76-ac10-13d8af64b57c/0922_1.mp4`;
 const WORKS_VIDEO_1006_SRC = `${CDN}/1e484aff-e292-4f31-a18a-86a9a2832fa9/1006.mp4`;
 const WORKS_VIDEO_1006_1_SRC = "/media/1006_1.mp4";
+// The résumé PDF (14 MB) exceeds the repo limit, so it streams from the CDN.
+const RESUME_SRC = `${CDN}/4a018a97-474b-4204-bfa2-fea38ab0bf58/Faris_Rahman_AP_resume.pdf`;
 
 const media = (name: string) => `/media/${name}`;
 
