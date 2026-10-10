@@ -213,7 +213,7 @@ function Hero() {
           onEnded={() => setActiveVideo((current) => (current + 1) % videos.length)}
         />
         <div className="hero-atmosphere" aria-hidden="true" />
-        <div className="relative z-10 mx-auto w-full max-w-6xl">
+        <div className="pointer-events-none relative z-10 mx-auto w-full max-w-6xl">
           <p className="eyebrow stagger" style={{ transitionDelay: "0ms" }}>
             Faris Rahman — Video Editor · Photographer · Color Grader
           </p>
