@@ -142,13 +142,13 @@ function useReveal<T extends HTMLElement>() {
 function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/60 backdrop-blur-xl">
-      <nav className="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-4 sm:flex sm:justify-between">
+      <nav className="mx-auto flex max-w-6xl flex-col items-center gap-3 px-4 py-3 sm:flex-row sm:justify-between sm:px-5 sm:py-4">
         <a href="#home" className="truncate text-xs font-semibold tracking-[0.35em] uppercase">
           Faris Rahman<span className="text-accent-red">.</span>
         </a>
-        <ul className="flex shrink-0 items-center gap-4 text-[10px] tracking-[0.2em] uppercase sm:gap-8 sm:text-xs">
+        <ul className="nav-scroll flex w-full max-w-full items-center justify-start gap-5 text-[10px] tracking-[0.2em] uppercase sm:w-auto sm:justify-end sm:gap-8 sm:text-xs">
           {NAV.map((n) => (
-            <li key={n.href}>
+            <li key={n.href} className="shrink-0">
               <a href={n.href} className="nav-link text-muted-foreground">
                 {n.label}
               </a>
