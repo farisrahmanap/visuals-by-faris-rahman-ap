@@ -530,3 +530,33 @@
 @media (prefers-reduced-motion: reduce) {
   .split-line > span, .stagger, .reveal, .photo-card img { transition: none !important; transform: none !important; opacity: 1 !important; clip-path: none !important; }
 }
+
+/* Mobile header: nav scrolls horizontally, scrollbar hidden */
+@utility nav-scroll {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+  @media (min-width: 640px) {
+    overflow: visible;
+  }
+}
+
+/* Résumé download button */
+@utility resume-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  border: 1px solid var(--color-border);
+  padding: 0.9rem 1.5rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-foreground);
+  transition: border-color 0.3s ease, color 0.3s ease;
+  &:hover {
+    border-color: color-mix(in oklab, var(--color-accent-red) 60%, transparent);
+    color: var(--color-accent-red);
+  }
+}
