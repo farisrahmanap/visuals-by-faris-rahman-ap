@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 
-import { Facebook, Instagram, Youtube } from "lucide-react";
+import { Facebook, FileDown, Instagram, Youtube } from "lucide-react";
 
 
 export const Route = createFileRoute("/")({
@@ -35,6 +35,8 @@ const HERO_VIDEO_SRC = `${CDN}/925b57d9-b977-43ab-8f12-a86478ed9759/For_Portfoli
 const SECOND_HERO_VIDEO_SRC = `${CDN}/3e354364-dc40-4d76-ac10-13d8af64b57c/0922_1.mp4`;
 const WORKS_VIDEO_1006_SRC = `${CDN}/1e484aff-e292-4f31-a18a-86a9a2832fa9/1006.mp4`;
 const WORKS_VIDEO_1006_1_SRC = "/media/1006_1.mp4";
+// The résumé PDF (14 MB) exceeds the repo limit, so it streams from the CDN.
+const RESUME_SRC = `${CDN}/4a018a97-474b-4204-bfa2-fea38ab0bf58/Faris_Rahman_AP_resume.pdf`;
 
 const media = (name: string) => `/media/${name}`;
 
@@ -140,13 +142,13 @@ function useReveal<T extends HTMLElement>() {
 function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/60 backdrop-blur-xl">
-      <nav className="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-4 sm:flex sm:justify-between">
+      <nav className="mx-auto flex max-w-6xl flex-col items-center gap-3 px-4 py-3 sm:flex-row sm:justify-between sm:px-5 sm:py-4">
         <a href="#home" className="truncate text-xs font-semibold tracking-[0.35em] uppercase">
           Faris Rahman<span className="text-accent-red">.</span>
         </a>
-        <ul className="flex shrink-0 items-center gap-4 text-[10px] tracking-[0.2em] uppercase sm:gap-8 sm:text-xs">
+        <ul className="nav-scroll flex w-full max-w-full items-center justify-start gap-5 text-[10px] tracking-[0.2em] uppercase sm:w-auto sm:justify-end sm:gap-8 sm:text-xs">
           {NAV.map((n) => (
-            <li key={n.href}>
+            <li key={n.href} className="shrink-0">
               <a href={n.href} className="nav-link text-muted-foreground">
                 {n.label}
               </a>
@@ -211,7 +213,7 @@ function Hero() {
           onEnded={() => setActiveVideo((current) => (current + 1) % videos.length)}
         />
         <div className="hero-atmosphere" aria-hidden="true" />
-        <div className="relative z-10 mx-auto w-full max-w-6xl">
+        <div className="pointer-events-none relative z-10 mx-auto w-full max-w-6xl">
           <p className="eyebrow stagger" style={{ transitionDelay: "0ms" }}>
             Faris Rahman — Video Editor · Photographer · Color Grader
           </p>
@@ -458,6 +460,16 @@ function About() {
                 </li>
               ))}
             </ul>
+            <a
+              href={RESUME_SRC}
+              target="_blank"
+              rel="noreferrer"
+              download="Faris_Rahman_AP_Resume.pdf"
+              className="resume-link mt-10"
+            >
+              <FileDown className="h-4 w-4" aria-hidden="true" />
+              Download Résumé (PDF)
+            </a>
           </div>
         </div>
       </div>
