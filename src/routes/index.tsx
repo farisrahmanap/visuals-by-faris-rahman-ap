@@ -460,6 +460,16 @@ function About() {
                 </li>
               ))}
             </ul>
+            <a
+              href={RESUME_SRC}
+              target="_blank"
+              rel="noreferrer"
+              download="Faris_Rahman_AP_Resume.pdf"
+              className="resume-link mt-10"
+            >
+              <FileDown className="h-4 w-4" aria-hidden="true" />
+              Download Résumé (PDF)
+            </a>
           </div>
         </div>
       </div>
