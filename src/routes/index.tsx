@@ -140,7 +140,7 @@ function useReveal<T extends HTMLElement>() {
       (entries) => {
         for (const e of entries) if (e.isIntersecting) setShown(true);
       },
-      { threshold: 0.15 },
+      { threshold: 0.01 },
     );
     io.observe(el);
     return () => io.disconnect();
