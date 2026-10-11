@@ -592,7 +592,6 @@ a:focus-visible { outline: 2px solid var(--accent-red); outline-offset: 5px; }
     linear-gradient(180deg, var(--background), color-mix(in oklab, var(--background) 70%, transparent) 26%, color-mix(in oklab, var(--background) 78%, transparent) 72%, var(--background)),
     radial-gradient(circle at 78% 30%, color-mix(in oklab, var(--background) 30%, transparent), transparent 60%);
 }
-.quotes-shade ~ .relative img { filter: saturate(0.85) contrast(1.05); }
 .quote-mark {
   display: block;
   font-family: "Barlow Condensed", sans-serif;
