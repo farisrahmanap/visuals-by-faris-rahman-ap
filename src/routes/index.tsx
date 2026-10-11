@@ -1,20 +1,28 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 
-import { Facebook, FileDown, Instagram, Youtube } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Facebook, FileDown, Instagram, Youtube } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import studio from "@/assets/editing-studio.jpg";
+import premiere from "@/assets/software-premiere.svg.asset.json";
+import photoshop from "@/assets/software-photoshop.svg.asset.json";
+import afterEffects from "@/assets/software-after-effects.svg.asset.json";
+import lightroom from "@/assets/software-lightroom.png.asset.json";
+import resolve from "@/assets/software-resolve.png.asset.json";
+import capcut from "@/assets/software-capcut.svg.asset.json";
 
 
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Faris Rahman — Video Editor & Photographer" },
+      { title: "Faris Rahman AP — Filmmaker, Video Editor & Photographer" },
       {
         name: "description",
         content:
           "Cinematic portfolio of Faris Rahman: film editing, photography stills and color grading work.",
       },
-      { property: "og:title", content: "Faris Rahman — Video Editor & Photographer" },
+      { property: "og:title", content: "Faris Rahman AP — Filmmaker, Video Editor & Photographer" },
       {
         property: "og:description",
         content:
@@ -111,6 +119,7 @@ const NAV = [
   { href: "#photos", label: "Photos" },
   { href: "#works", label: "Works" },
   { href: "#color-grading", label: "Color Grading" },
+  { href: "#contact", label: "Contact" },
 ];
 
 const CONNECT = [
@@ -131,7 +140,7 @@ function useReveal<T extends HTMLElement>() {
       (entries) => {
         for (const e of entries) if (e.isIntersecting) setShown(true);
       },
-      { threshold: 0.15 },
+      { threshold: 0.01 },
     );
     io.observe(el);
     return () => io.disconnect();
@@ -142,11 +151,11 @@ function useReveal<T extends HTMLElement>() {
 function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/60 backdrop-blur-xl">
-      <nav className="mx-auto flex max-w-6xl flex-col items-center gap-3 px-4 py-3 sm:flex-row sm:justify-between sm:px-5 sm:py-4">
-        <a href="#home" className="truncate text-xs font-semibold tracking-[0.35em] uppercase">
-          Faris Rahman<span className="text-accent-red">.</span>
+      <nav className="portfolio-nav mx-auto max-w-[1440px] px-5 py-4">
+        <a href="#home" className="brand-link min-w-0 text-xs font-semibold uppercase">
+          <span className="brand-dot" aria-hidden="true" />Faris Rahman AP
         </a>
-        <ul className="nav-scroll flex w-full max-w-full items-center justify-start gap-5 text-[10px] tracking-[0.2em] uppercase sm:w-auto sm:justify-end sm:gap-8 sm:text-xs">
+        <ul className="nav-scroll flex min-w-0 max-w-full items-center gap-5 text-[10px] uppercase">
           {NAV.map((n) => (
             <li key={n.href} className="shrink-0">
               <a href={n.href} className="nav-link text-muted-foreground">
@@ -155,6 +164,7 @@ function Header() {
             </li>
           ))}
         </ul>
+        <a className="website-link text-xs text-muted-foreground" href="https://editbyfarisrahman.vercel.app" target="_blank" rel="noreferrer"><ArrowUpRight className="h-4 w-4 shrink-0" />editbyfarisrahman.vercel.app</a>
       </nav>
     </header>
   );
@@ -162,10 +172,10 @@ function Header() {
 
 /* ---------- WORKS SHOWN AS SEPARATE PLAYERS BELOW THE HERO ---------- */
 const WORKS = [
-  { src: SECOND_HERO_VIDEO_SRC, orientation: "landscape", title: "Showreel", category: "Film Edit · Color" },
-  { src: HERO_VIDEO_SRC, orientation: "portrait", title: "Portfolio Cut", category: "Vertical Edit · Color" },
-  { src: WORKS_VIDEO_1006_SRC, orientation: "portrait", title: "Frames in Motion", category: "Short-Form Edit" },
-  { src: WORKS_VIDEO_1006_1_SRC, orientation: "portrait", title: "Rhythm Study", category: "Short-Form Edit" },
+  { src: SECOND_HERO_VIDEO_SRC, orientation: "landscape", title: "Film 01", category: "Video Editing · Color Grading" },
+  { src: HERO_VIDEO_SRC, orientation: "portrait", title: "Film 02", category: "Video Editing · Color Grading" },
+  { src: WORKS_VIDEO_1006_SRC, orientation: "portrait", title: "Film 03", category: "Video Editing" },
+  { src: WORKS_VIDEO_1006_1_SRC, orientation: "portrait", title: "Film 04", category: "Video Editing" },
 ] as const;
 
 const SERVICES = [
@@ -200,9 +210,40 @@ function Hero() {
 
   return (
     <section id="home" className={`bg-background ${ready ? "is-visible" : ""}`}>
-      <div className="relative flex min-h-screen items-end overflow-hidden px-5 pt-28 pb-16 sm:pb-24">
+      <div className="studio-hero relative overflow-hidden px-5">
+        <img src={studio} width={1920} height={1088} alt="" className="studio-background" fetchPriority="high" />
+        <div className="studio-shade" aria-hidden="true" />
+        <div className="hero-intro relative z-10 mx-auto w-full max-w-6xl">
+          <p className="eyebrow stagger">Filmmaker · Video Editor · Photographer</p>
+          <h1 className="display-title mt-6"><Lines lines={["Faris"]} /><Lines lines={["Rahman AP"]} className="text-accent-red" /></h1>
+          <p className="hero-education mt-5 text-xs text-muted-foreground uppercase">Mechanical Engineering · Second Year</p>
+          <p className="mt-5 text-xs font-semibold text-foreground">Shoot. Edit. Grade.</p>
+          <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">I capture moments, craft stories and turn ideas into visuals that feel alive.</p>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <Button asChild variant="cinematic" size="lg"><a href="#works"><ArrowUpRight />View My Works</a></Button>
+            <Button asChild variant="outline" size="lg"><a href="#contact">Contact Me</a></Button>
+          </div>
+          <ul className="software-row mt-8" aria-label="Editing software">
+            {[
+              { name: "Premiere Pro", icon: premiere }, { name: "CapCut", icon: capcut },
+              { name: "Photoshop", icon: photoshop }, { name: "After Effects", icon: afterEffects },
+              { name: "Lightroom", icon: lightroom }, { name: "DaVinci Resolve", icon: resolve },
+            ].map((tool) => <li key={tool.name}><img src={`https://id-preview--f18c1145-efcc-4ab6-afba-3c42b1b480e6.lovable.app${tool.icon.url}`} alt="" width={40} height={40} className={tool.name === "CapCut" ? "capcut-icon" : ""} /><span>{tool.name}</span></li>)}
+          </ul>
+        </div>
+      </div>
+      <div className="mx-auto max-w-6xl px-5 pt-10 pb-8">
+        <div className="grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4">
+          <div className="min-w-0"><p className="eyebrow">Featured Works</p><h2 className="section-title mt-3">Visual stories <span className="text-accent-red">that breathe</span></h2></div>
+          <a href="#photos" aria-label="Explore photography" className="text-muted-foreground"><ArrowDown className="h-6 w-6" /></a>
+        </div>
+        <div className="featured-grid mt-6">
+          {PHOTOS.filter((_, index) => [5, 8, 2].includes(index)).map((photo) => <a href="#photos" key={photo.src} className="featured-card"><img src={photo.src} alt={photo.alt} loading="lazy" /><span className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2 px-4 py-3"><span className="min-w-0"><span className="block text-xs font-semibold uppercase">{photo.title}</span><span className="text-[10px] text-muted-foreground uppercase">Photography</span></span><ArrowUpRight className="h-4 w-4" /></span></a>)}
+        </div>
+      </div>
+      <div className="home-film-stage relative mx-auto max-w-6xl px-5 py-8">
+        <p className="eyebrow mb-4">In Motion · Selected Films</p>
         <video
-          key={activeVideo}
           className="hero-video"
           src={videos[activeVideo]}
           autoPlay
@@ -212,24 +253,6 @@ function Hero() {
           onVolumeChange={(e) => setIsMuted(e.currentTarget.muted)}
           onEnded={() => setActiveVideo((current) => (current + 1) % videos.length)}
         />
-        <div className="hero-atmosphere" aria-hidden="true" />
-        <div className="pointer-events-none relative z-10 mx-auto w-full max-w-6xl">
-          <p className="eyebrow stagger" style={{ transitionDelay: "0ms" }}>
-            Faris Rahman — Video Editor · Photographer · Color Grader
-          </p>
-          <h1 className="display-title mt-6">
-            <Lines lines={["I don't just", "create content."]} />
-            <Lines lines={["I create feelings", "that last."]} className="text-accent-red" />
-          </h1>
-          <div className="mt-10 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-            <p className="stagger max-w-md text-sm leading-relaxed text-muted-foreground sm:text-base" style={{ transitionDelay: "500ms" }}>
-              Every frame has a purpose. Every cut has a rhythm. Every story deserves to be felt.
-            </p>
-            <p className="stagger text-[10px] tracking-[0.4em] text-muted-foreground uppercase sm:text-xs" style={{ transitionDelay: "650ms" }}>
-              Shoot. Edit. Grade.
-            </p>
-          </div>
-        </div>
       </div>
     </section>
   );
@@ -415,7 +438,7 @@ function About() {
                 src={media("portrait-faris.jpg")}
                 alt="Portrait of Faris Rahman at golden hour"
                 loading="lazy"
-                className="aspect-[4/5] w-full object-cover"
+                className="h-auto w-full object-contain"
               />
             </div>
             <figcaption className="mt-6 text-center text-[10px] tracking-[0.4em] text-muted-foreground uppercase">
@@ -490,7 +513,9 @@ function Index() {
         <Works />
         <ColorGrading />
       </main>
-      <footer className="border-t border-border/60 px-5 py-10 text-center">
+      <footer id="contact" className="border-t border-border/60 px-5 py-16 text-center">
+        <p className="eyebrow">Contact</p>
+        <h2 className="section-title mt-4 mb-8">Let's create <span className="text-accent-red">something real.</span></h2>
         <ul className="mb-6 flex justify-center gap-8">
           {CONNECT.map((c) => (
             <li key={c.label}>
@@ -502,6 +527,7 @@ function Index() {
                 className="connect-link"
               >
                 <c.icon className="h-4 w-4" aria-hidden="true" />
+                <span className="hidden sm:inline">{c.label}</span>
               </a>
             </li>
           ))}
