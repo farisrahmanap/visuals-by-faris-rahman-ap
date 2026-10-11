@@ -584,6 +584,49 @@ a:focus-visible { outline: 2px solid var(--accent-red); outline-offset: 5px; }
 @media (max-width: 380px) { .display-title { font-size: 3.25rem; } .eyebrow { letter-spacing: 0; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 0s !important; animation-duration: 0s !important; } }
 
+/* Quotes band: editing-studio backdrop with motivation + client comments */
+.quotes-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, var(--background), color-mix(in oklab, var(--background) 70%, transparent) 26%, color-mix(in oklab, var(--background) 78%, transparent) 72%, var(--background)),
+    radial-gradient(circle at 78% 30%, color-mix(in oklab, var(--background) 30%, transparent), transparent 60%);
+}
+.quote-mark {
+  display: block;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 4.5rem;
+  line-height: 0.6;
+}
+.quote-line {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: clamp(1.9rem, 5.5vw, 4.25rem);
+  line-height: 1.04;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-wrap: balance;
+  filter: drop-shadow(0 2px 18px color-mix(in oklab, var(--background) 55%, transparent));
+}
+.quote-sub {
+  font-size: 0.8125rem;
+  line-height: 1.8;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted-foreground);
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-border);
+}
+.comment-card {
+  padding: 1.75rem;
+  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--color-card) 72%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 6px;
+  transition: border-color 0.4s ease;
+}
+.comment-card:hover { border-color: color-mix(in oklab, var(--accent-red) 55%, transparent); }
+
 /* Résumé download button */
 @utility resume-link {
   display: inline-flex;
