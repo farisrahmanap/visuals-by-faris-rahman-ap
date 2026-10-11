@@ -119,6 +119,7 @@ const NAV = [
   { href: "#photos", label: "Photos" },
   { href: "#works", label: "Works" },
   { href: "#color-grading", label: "Color Grading" },
+  { href: "#quotes", label: "Quotes" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -501,6 +502,64 @@ function About() {
 }
 
 
+// Motivational lines + comments shown over the editing-studio backdrop.
+// SAMPLE text — replace with Faris's real quotes and client comments.
+const MOTIVATION = [
+  "Every frame carries a feeling — my work is to make you feel it.",
+  "Great edits aren't watched. They're felt.",
+  "Light sets the mood. Color tells the truth. Rhythm tells the story.",
+] as const;
+
+const COMMENTS = [
+  {
+    text: "Faris turned our raw footage into something that felt far bigger than the shoot itself. The grade alone carried the whole mood of the film.",
+  },
+  {
+    text: "Fast, sharp and full of ideas. He understood the story faster than we could explain it.",
+  },
+  {
+    text: "The final cut gave me goosebumps. This is what a confident edit looks like.",
+  },
+] as const;
+
+function Words() {
+  const reveal = useReveal<HTMLElement>();
+  return (
+    <section
+      id="quotes"
+      ref={reveal.ref}
+      className={`${reveal.className} relative overflow-hidden bg-background`}
+    >
+      <img src={studio} alt="" aria-hidden="true" loading="lazy" className="studio-background" />
+      <div className="quotes-shade" aria-hidden="true" />
+      <div className="relative z-10 mx-auto max-w-6xl px-5 py-28 sm:py-40">
+        <SectionHead index="06" title="Quotes" sub="The mindset behind the work — and what people say about it." />
+        <figure className="mt-14">
+          <span className="quote-mark text-accent-red" aria-hidden="true">“</span>
+          <blockquote className="quote-line mt-4 max-w-4xl">{MOTIVATION[0]}</blockquote>
+        </figure>
+        <div className="mt-16 grid gap-6 min-[640px]:grid-cols-3">
+          {MOTIVATION.slice(1).map((line, i) => (
+            <p key={line} className="quote-sub stagger" style={{ transitionDelay: `${i * 120}ms` }}>
+              {line}
+            </p>
+          ))}
+        </div>
+        <div className="mt-20 grid gap-6 min-[640px]:grid-cols-3">
+          {COMMENTS.map((comment, i) => (
+            <figure key={comment.text} className="comment-card stagger" style={{ transitionDelay: `${i * 120}ms` }}>
+              <blockquote className="text-sm leading-relaxed text-foreground">{comment.text}</blockquote>
+              <figcaption className="mt-6 text-[10px] tracking-[0.35em] text-muted-foreground uppercase">
+                Client Comment · {String(i + 1).padStart(2, "0")}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -512,6 +571,7 @@ function Index() {
         <Photos />
         <Works />
         <ColorGrading />
+        <Words />
       </main>
       <footer id="contact" className="border-t border-border/60 px-5 py-16 text-center">
         <p className="eyebrow">Contact</p>
