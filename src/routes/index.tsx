@@ -238,7 +238,7 @@ function Hero() {
           <a href="#photos" aria-label="Explore photography" className="text-muted-foreground"><ArrowDown className="h-6 w-6" /></a>
         </div>
         <div className="featured-grid mt-6">
-          {[PHOTOS[5], PHOTOS[8], PHOTOS[2]].map((photo) => <a href="#photos" key={photo.src} className="featured-card"><img src={photo.src} alt={photo.alt} loading="lazy" /><span className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2 px-4 py-3"><span className="min-w-0"><span className="block text-xs font-semibold uppercase">{photo.title}</span><span className="text-[10px] text-muted-foreground uppercase">Photography</span></span><ArrowUpRight className="h-4 w-4" /></span></a>)}
+          {PHOTOS.filter((_, index) => [5, 8, 2].includes(index)).map((photo) => <a href="#photos" key={photo.src} className="featured-card"><img src={photo.src} alt={photo.alt} loading="lazy" /><span className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2 px-4 py-3"><span className="min-w-0"><span className="block text-xs font-semibold uppercase">{photo.title}</span><span className="text-[10px] text-muted-foreground uppercase">Photography</span></span><ArrowUpRight className="h-4 w-4" /></span></a>)}
         </div>
       </div>
       <div className="home-film-stage relative mx-auto max-w-6xl px-5 py-8">
