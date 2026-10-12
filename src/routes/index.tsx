@@ -149,6 +149,42 @@ function useReveal<T extends HTMLElement>() {
   return { ref, className: shown ? "reveal is-visible" : "reveal" };
 }
 
+function usePortfolioMotion() {
+  const ref = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    const root = ref.current;
+    if (!root) return;
+    const items = root.querySelectorAll<HTMLElement>(
+      ".section-title, .eyebrow, .featured-card, .work-card, .photo-card, .compare, .service-row, .bio-name, .bio-role, .bio-grid > div, #about figure, #about .resume-link, .quote-mark, .quote-line, .quote-sub, .comment-card, .hero-intro > p, .hero-intro > div, .software-row li, .home-film-stage",
+    );
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let observer: IntersectionObserver | undefined;
+    const showAll = () => {
+      observer?.disconnect();
+      items.forEach((item) => item.setAttribute("data-entered", "true"));
+    };
+    items.forEach((item) => item.classList.add("motion-item"));
+    if (preference.matches || !("IntersectionObserver" in window)) {
+      showAll();
+    } else {
+      observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.setAttribute("data-entered", "true");
+          observer?.unobserve(entry.target);
+        });
+      }, { threshold: 0.04, rootMargin: "0px 0px -24px 0px" });
+      items.forEach((item) => observer?.observe(item));
+    }
+    preference.addEventListener("change", showAll);
+    return () => {
+      observer?.disconnect();
+      preference.removeEventListener("change", showAll);
+    };
+  }, []);
+  return ref;
+}
+
 function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/60 backdrop-blur-xl">
@@ -211,9 +247,24 @@ function Hero() {
 
   return (
     <section id="home" className={`bg-background ${ready ? "is-visible" : ""}`}>
-      <div className="studio-hero relative overflow-hidden px-5">
-        <img src={studio} width={1920} height={1088} alt="" className="studio-background" fetchPriority="high" />
-        <div className="studio-shade" aria-hidden="true" />
+      <div className="home-film-stage relative mx-auto max-w-6xl px-5 pb-8">
+        <div className="home-film-heading mb-5 flex flex-wrap items-end justify-between gap-3">
+          <h2 className="section-title">Faris Rahman <span className="text-accent-red">AP</span></h2>
+          <p className="eyebrow">Shoot. Edit. Grade.</p>
+        </div>
+        <video
+          className="hero-video"
+          src={videos[activeVideo]}
+          autoPlay
+          muted={isMuted}
+          controls
+          playsInline
+          aria-label="Faris Rahman selected films"
+          onVolumeChange={(e) => setIsMuted(e.currentTarget.muted)}
+          onEnded={() => setActiveVideo((current) => (current + 1) % videos.length)}
+        />
+      </div>
+      <div className="home-introduction relative px-5 py-12 sm:py-16">
         <div className="hero-intro relative z-10 mx-auto w-full max-w-6xl">
           <p className="eyebrow stagger">Filmmaker · Video Editor · Photographer</p>
           <h1 className="display-title mt-6"><Lines lines={["Faris"]} /><Lines lines={["Rahman AP"]} className="text-accent-red" /></h1>
@@ -241,19 +292,6 @@ function Hero() {
         <div className="featured-grid mt-6">
           {PHOTOS.filter((_, index) => [5, 8, 2].includes(index)).map((photo) => <a href="#photos" key={photo.src} className="featured-card"><img src={photo.src} alt={photo.alt} loading="lazy" /><span className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2 px-4 py-3"><span className="min-w-0"><span className="block text-xs font-semibold uppercase">{photo.title}</span><span className="text-[10px] text-muted-foreground uppercase">Photography</span></span><ArrowUpRight className="h-4 w-4" /></span></a>)}
         </div>
-      </div>
-      <div className="home-film-stage relative mx-auto max-w-6xl px-5 py-8">
-        <p className="eyebrow mb-4">In Motion · Selected Films</p>
-        <video
-          className="hero-video"
-          src={videos[activeVideo]}
-          autoPlay
-          muted={isMuted}
-          controls
-          playsInline
-          onVolumeChange={(e) => setIsMuted(e.currentTarget.muted)}
-          onEnded={() => setActiveVideo((current) => (current + 1) % videos.length)}
-        />
       </div>
     </section>
   );
@@ -561,8 +599,9 @@ function Words() {
 }
 
 function Index() {
+  const motionRef = usePortfolioMotion();
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div ref={motionRef} className="portfolio-page min-h-screen bg-background text-foreground">
       <Header />
       <main>
         <Hero />
