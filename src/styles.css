@@ -644,3 +644,55 @@ a:focus-visible { outline: 2px solid var(--accent-red); outline-offset: 5px; }
     color: var(--color-accent-red);
   }
 }
+
+/* Video-first Home and one-shot, individually observed cinematic entrances. */
+.home-film-stage { padding-top: 140px; }
+.home-film-stage .hero-video { height: min(56svh, 640px); }
+.home-film-heading .section-title { font-size: 2rem; line-height: 1; }
+.home-introduction { border-bottom: 1px solid var(--border); }
+.portfolio-page section.reveal { opacity: 1; transform: none; }
+.portfolio-page .photo-card img { clip-path: none; }
+.portfolio-page .motion-item {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .8s ease, transform .9s cubic-bezier(.22, 1, .36, 1), border-color .3s ease, box-shadow .3s ease;
+}
+.portfolio-page .motion-item[data-entered="true"] { opacity: 1; transform: none; }
+.portfolio-page .photo-card.motion-item,
+.portfolio-page .work-card.motion-item,
+.portfolio-page .compare.motion-item,
+.portfolio-page .featured-card.motion-item { transform: translateY(32px); }
+.portfolio-page .motion-item[data-entered="true"]:is(.photo-card, .work-card, .compare, .featured-card) { transform: none; }
+.portfolio-page .motion-item.quote-line { transform: translateY(18px); transition-duration: 1.2s; }
+.portfolio-page .motion-item.quote-line[data-entered="true"] { transform: none; }
+.software-row li:nth-child(2) { transition-delay: 60ms; }
+.software-row li:nth-child(3) { transition-delay: 120ms; }
+.software-row li:nth-child(4) { transition-delay: 180ms; }
+.software-row li:nth-child(5) { transition-delay: 240ms; }
+.software-row li:nth-child(6) { transition-delay: 300ms; }
+.portfolio-page .quote-mark[data-entered="true"] { animation: quote-flourish .9s ease both; }
+@keyframes quote-flourish {
+  from { opacity: 0; transform: translateY(12px) rotate(-12deg); }
+  to { opacity: 1; transform: none; }
+}
+.portfolio-page .hero-video { transition: border-color .35s ease, box-shadow .35s ease; }
+.portfolio-page .hero-video:focus-within { border-color: var(--accent-red); }
+.portfolio-page :is(.connect-link, .resume-link, .nav-link) svg { transition: transform .3s ease; }
+@media (hover: hover) and (pointer: fine) {
+  .portfolio-page :is(.photo-card, .work-card, .featured-card)[data-entered="true"]:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-red);
+    box-shadow: 0 12px 28px color-mix(in oklab, var(--background) 65%, transparent);
+  }
+  .portfolio-page :is(.connect-link, .resume-link):hover svg { transform: translateY(-2px); }
+  .portfolio-page .comment-card[data-entered="true"]:hover { transform: translateY(-3px); }
+}
+@media (min-width: 1024px) {
+  .home-film-stage { padding-top: 112px; }
+  .home-film-heading .section-title { font-size: 3rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-page .motion-item,
+  .portfolio-page .motion-item[data-entered="true"],
+  .portfolio-page .motion-item[data-entered="true"]:hover { opacity: 1; transform: none !important; animation: none !important; transition: none !important; }
+}
