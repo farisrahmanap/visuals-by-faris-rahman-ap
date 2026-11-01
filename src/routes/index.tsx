@@ -30,8 +30,10 @@ export const Route = createFileRoute("/")({
           "Cinematic portfolio of Faris Rahman: film editing, photography stills and color grading work.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://editbyfarisrahman.lovable.app/" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://editbyfarisrahman.lovable.app/" }],
   }),
 });
 
