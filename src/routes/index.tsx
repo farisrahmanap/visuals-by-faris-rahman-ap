@@ -14,6 +14,7 @@ import capcut from "@/assets/software-capcut.svg.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Index,
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Faris Rahman AP — Filmmaker, Video Editor & Photographer" },
