@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowDown, ArrowUpRight, Facebook, FileDown, Instagram, Youtube } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import studio from "@/assets/editing-studio.jpg";
+import aboutPortrait from "@/assets/about-portrait.png.asset.json";
 import premiere from "@/assets/software-premiere.svg.asset.json";
 import photoshop from "@/assets/software-photoshop.svg.asset.json";
 import afterEffects from "@/assets/software-after-effects.svg.asset.json";
@@ -41,7 +42,8 @@ export const Route = createFileRoute("/")({
 // Small media ships inside the site (public/media) so any static host
 // (Vercel, Netlify, ...) serves it. The three largest videos exceed the
 // repository file limit, so they stream from the Lovable CDN instead.
-const CDN = "https://id-preview--f18c1145-efcc-4ab6-afba-3c42b1b480e6.lovable.app/__l5e/assets-v1";
+const ASSET_HOST = "https://id-preview--f18c1145-efcc-4ab6-afba-3c42b1b480e6.lovable.app";
+const CDN = `${ASSET_HOST}/__l5e/assets-v1`;
 const HERO_VIDEO_SRC = `${CDN}/925b57d9-b977-43ab-8f12-a86478ed9759/For_Portfolio.mp4`;
 const SECOND_HERO_VIDEO_SRC = `${CDN}/3e354364-dc40-4d76-ac10-13d8af64b57c/0922_1.mp4`;
 const WORKS_VIDEO_1006_SRC = `${CDN}/1e484aff-e292-4f31-a18a-86a9a2832fa9/1006.mp4`;
@@ -158,7 +160,7 @@ function usePortfolioMotion() {
     const root = ref.current;
     if (!root) return;
     const items = root.querySelectorAll<HTMLElement>(
-      ".section-title, .eyebrow, .featured-card, .work-card, .photo-card, .compare, .service-row, .bio-name, .bio-role, .bio-grid > div, #about figure, #about .resume-link, .quote-mark, .quote-line, .quote-sub, .comment-card, .hero-intro > p, .hero-intro > div, .software-row li, .home-film-stage",
+      ".section-title, .eyebrow, .featured-card, .work-card, .photo-card, .compare, .service-row, .bio-name, .bio-role, .bio-grid > div, #about figure, #about .resume-link, .quote-mark, .quote-line, .quote-sub, .comment-card, .home-hero-content > *, .software-row li",
     );
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
     let observer: IntersectionObserver | undefined;
@@ -249,27 +251,22 @@ function Hero() {
   }, []);
 
   return (
-    <section id="home" className={`bg-background ${ready ? "is-visible" : ""}`}>
-      <div className="home-film-stage relative mx-auto max-w-6xl px-5 pb-8">
-        <div className="home-film-heading mb-5 flex flex-wrap items-end justify-between gap-3">
-          <h2 className="section-title">Faris Rahman <span className="text-accent-red">AP</span></h2>
-          <p className="eyebrow">Shoot. Edit. Grade.</p>
-        </div>
+    <>
+      <section id="home" className={`home-hero relative isolate flex min-h-[100svh] items-center overflow-hidden bg-background px-5 pb-24 pt-32 ${ready ? "is-visible" : ""}`}>
         <video
-          className="hero-video"
+          className="home-background-video"
           src={videos[activeVideo]}
           autoPlay
           muted={isMuted}
           controls
           playsInline
-          aria-label="Faris Rahman selected films"
+          aria-label="Faris Rahman selected films. Use the playback controls to hear audio."
           onVolumeChange={(e) => setIsMuted(e.currentTarget.muted)}
           onEnded={() => setActiveVideo((current) => (current + 1) % videos.length)}
         />
-      </div>
-      <div className="home-introduction relative px-5 py-12 sm:py-16">
-        <div className="hero-intro relative z-10 mx-auto w-full max-w-6xl">
-          <p className="eyebrow stagger">Filmmaker · Video Editor · Photographer</p>
+        <div className="home-video-shade" aria-hidden="true" />
+        <div className="home-hero-content relative z-10 mx-auto w-full max-w-6xl">
+          <p className="eyebrow">Filmmaker · Video Editor · Photographer</p>
           <h1 className="display-title mt-6"><Lines lines={["Faris"]} /><Lines lines={["Rahman AP"]} className="text-accent-red" /></h1>
           <p className="hero-education mt-5 text-xs text-muted-foreground uppercase">Mechanical Engineering · Second Year</p>
           <p className="mt-5 text-xs font-semibold text-foreground">Shoot. Edit. Grade.</p>
@@ -283,11 +280,13 @@ function Hero() {
               { name: "Premiere Pro", icon: premiere }, { name: "CapCut", icon: capcut },
               { name: "Photoshop", icon: photoshop }, { name: "After Effects", icon: afterEffects },
               { name: "Lightroom", icon: lightroom }, { name: "DaVinci Resolve", icon: resolve },
-            ].map((tool) => <li key={tool.name}><img src={`https://id-preview--f18c1145-efcc-4ab6-afba-3c42b1b480e6.lovable.app${tool.icon.url}`} alt="" width={40} height={40} className={tool.name === "CapCut" ? "capcut-icon" : ""} /><span>{tool.name}</span></li>)}
+            ].map((tool) => <li key={tool.name}><img src={`${ASSET_HOST}${tool.icon.url}`} alt="" width={40} height={40} className={tool.name === "CapCut" ? "capcut-icon" : ""} /><span>{tool.name}</span></li>)}
           </ul>
         </div>
-      </div>
-      <div className="mx-auto max-w-6xl px-5 pt-10 pb-8">
+        <a href="#featured" aria-label="Scroll to featured photography" className="home-scroll-cue"><ArrowDown className="h-5 w-5" /></a>
+      </section>
+      <section id="featured" className="bg-background">
+        <div className="mx-auto max-w-6xl px-5 pt-10 pb-8">
         <div className="grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4">
           <div className="min-w-0"><p className="eyebrow">Featured Works</p><h2 className="section-title mt-3">Visual stories <span className="text-accent-red">that breathe</span></h2></div>
           <a href="#photos" aria-label="Explore photography" className="text-muted-foreground"><ArrowDown className="h-6 w-6" /></a>
@@ -295,8 +294,9 @@ function Hero() {
         <div className="featured-grid mt-6">
           {PHOTOS.filter((_, index) => [5, 8, 2].includes(index)).map((photo) => <a href="#photos" key={photo.src} className="featured-card"><img src={photo.src} alt={photo.alt} loading="lazy" /><span className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2 px-4 py-3"><span className="min-w-0"><span className="block text-xs font-semibold uppercase">{photo.title}</span><span className="text-[10px] text-muted-foreground uppercase">Photography</span></span><ArrowUpRight className="h-4 w-4" /></span></a>)}
         </div>
-      </div>
-    </section>
+        </div>
+      </section>
+    </>
   );
 }
 
@@ -474,13 +474,13 @@ function About() {
       <div className="mx-auto max-w-6xl">
         <SectionHead index="01" title="About" sub="Video editor, photographer and color grader based in Kerala." />
         <div className="mt-12 grid gap-12 sm:mt-16 md:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] md:gap-16">
-          <figure className="mx-auto w-full max-w-sm">
-            <div className="overflow-hidden border border-border/60">
+          <figure className="about-portrait-figure mx-auto w-full max-w-sm">
+            <div className="about-portrait-frame overflow-hidden border border-border/60">
               <img
-                src={media("portrait-faris.jpg")}
-                alt="Portrait of Faris Rahman at golden hour"
+                src={`${ASSET_HOST}${aboutPortrait.url}`}
+                alt="Chest-up portrait of Faris Rahman in a sage green shirt"
                 loading="lazy"
-                className="h-auto w-full object-contain"
+                className="about-portrait"
               />
             </div>
             <figcaption className="mt-6 text-center text-[10px] tracking-[0.4em] text-muted-foreground uppercase">
