@@ -687,9 +687,55 @@ a:focus-visible { outline: 2px solid var(--accent-red); outline-offset: 5px; }
   .portfolio-page :is(.connect-link, .resume-link):hover svg { transform: translateY(-2px); }
   .portfolio-page .comment-card[data-entered="true"]:hover { transform: translateY(-3px); }
 }
+.home-hero {
+  min-height: max(760px, 100svh);
+  padding-top: clamp(9rem, 18vh, 12rem);
+  padding-bottom: 9rem;
+}
+.home-background-video {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  background: var(--background);
+}
+.home-video-shade {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, color-mix(in oklab, var(--background) 88%, transparent), color-mix(in oklab, var(--background) 62%, transparent) 52%, color-mix(in oklab, var(--background) 28%, transparent)), linear-gradient(0deg, color-mix(in oklab, var(--background) 72%, transparent), transparent 48%, color-mix(in oklab, var(--background) 34%, transparent));
+}
+.home-hero-content { z-index: 2; }
+.home-hero-content > .eyebrow,
+.home-hero-content > .hero-education,
+.home-hero-content > p:not(.eyebrow):not(.hero-education) { color: color-mix(in oklab, var(--foreground) 88%, transparent); }
+.home-scroll-cue {
+  position: absolute;
+  z-index: 2;
+  right: max(1.25rem, calc((100vw - 72rem) / 2));
+  bottom: 2rem;
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  border: 1px solid var(--border);
+  color: var(--foreground);
+  transition: color .25s ease, border-color .25s ease, transform .25s ease;
+}
+.home-scroll-cue:hover { color: var(--accent-red); border-color: var(--accent-red); transform: translateY(3px); }
+.about-portrait-frame { aspect-ratio: 4 / 3; background: var(--card); }
+.about-portrait { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+@media (max-width: 639px) {
+  .home-hero { min-height: max(760px, 100svh); padding-top: 10rem; padding-bottom: 8rem; }
+  .home-video-shade { background: linear-gradient(90deg, color-mix(in oklab, var(--background) 86%, transparent), color-mix(in oklab, var(--background) 60%, transparent)), linear-gradient(0deg, color-mix(in oklab, var(--background) 82%, transparent), transparent 62%, color-mix(in oklab, var(--background) 45%, transparent)); }
+  .home-hero .software-row { max-width: 400px; gap: 16px 8px; }
+}
 @media (min-width: 1024px) {
-  .home-film-stage { padding-top: 112px; }
-  .home-film-heading .section-title { font-size: 3rem; }
+  .home-hero { padding-top: 10rem; padding-bottom: 10rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   .portfolio-page .motion-item,
