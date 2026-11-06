@@ -6,6 +6,6 @@
 - [x] Restore video-first Home; reserve the studio backdrop for Quotes.
 - [x] Add cinematic, accessible scroll and interaction animations throughout.
 - [x] Verify layout, sequential switching, controls, comparisons and reduced-motion behavior; actual video decoding remains unverified in headless Chromium.
-- [ ] Use the newly supplied chest-up portrait in About.
-- [ ] Combine the Home introduction and sequential video into one video-background section with accessible playback controls.
-- [ ] Verify the Home and About layouts at desktop and phone widths.
+- [x] Use the newly supplied chest-up portrait in About.
+- [x] Combine the Home introduction and sequential video into one video-background section with accessible playback controls.
+- [x] Verify the Home and About layouts at desktop and phone widths; the hero video played and advanced sequentially, the portrait loaded, and no browser errors or phone-width overflow appeared.

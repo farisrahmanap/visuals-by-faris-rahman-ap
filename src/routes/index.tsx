@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowDown, ArrowUpRight, Facebook, FileDown, Instagram, Youtube } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import studio from "@/assets/editing-studio.jpg";
-import aboutPortrait from "@/assets/about-portrait.png.asset.json";
+import aboutPortrait from "@/assets/about-portrait-chest-up.png.asset.json";
 import premiere from "@/assets/software-premiere.svg.asset.json";
 import photoshop from "@/assets/software-photoshop.svg.asset.json";
 import afterEffects from "@/assets/software-after-effects.svg.asset.json";
