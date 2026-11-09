@@ -9,4 +9,5 @@
 - [x] Use the newly supplied chest-up portrait in About.
 - [x] Combine the Home introduction and sequential video into one video-background section with accessible playback controls.
 - [x] Verify the Home and About layouts at desktop and phone widths; the hero video played and advanced sequentially, the portrait loaded, and no browser errors or phone-width overflow appeared.
-- [ ] Add the two requested club memberships and the uploaded car film to Works and the Home sequence.
+- [x] Add the requested club memberships and uploaded car film to Works and the Home sequence.
+- [x] Preserve all existing portfolio sections while adding the memberships and film.
