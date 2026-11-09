@@ -123,6 +123,7 @@ function Whatsapp({ className }: { className?: string }) {
 const NAV = [
   { href: "#home", label: "Home" },
   { href: "#about", label: "About" },
+  { href: "#clubs", label: "Clubs" },
   { href: "#photos", label: "Photos" },
   { href: "#works", label: "Works" },
   { href: "#color-grading", label: "Color Grading" },
@@ -162,7 +163,7 @@ function usePortfolioMotion() {
     const root = ref.current;
     if (!root) return;
     const items = root.querySelectorAll<HTMLElement>(
-      ".section-title, .eyebrow, .featured-card, .work-card, .photo-card, .compare, .service-row, .bio-name, .bio-role, .bio-grid > div, #about figure, #about .resume-link, .quote-mark, .quote-line, .quote-sub, .comment-card, .home-hero-content > *, .software-row li",
+      ".section-title, .eyebrow, .featured-card, .work-card, .photo-card, .compare, .service-row, .membership-card, .bio-name, .bio-role, .bio-grid > div, #about figure, #about .resume-link, .quote-mark, .quote-line, .quote-sub, .comment-card, .home-hero-content > *, .software-row li",
     );
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
     let observer: IntersectionObserver | undefined;
@@ -303,11 +304,11 @@ function Hero() {
   );
 }
 
-function SectionHead({ index, title, sub }: { index: string; title: string; sub: string }) {
+function SectionHead({ index, title, sub }: { index?: string; title: string; sub: string }) {
   return (
     <div className="flex flex-col gap-4 border-b border-border pb-8 sm:flex-row sm:items-end sm:justify-between">
       <h2 className="section-title">
-        <span className="mr-4 align-top text-xs font-medium tracking-[0.3em] text-accent-red">{index}</span>
+        {index ? <span className="mr-4 align-top text-xs font-medium tracking-[0.3em] text-accent-red">{index}</span> : null}
         {title}
       </h2>
       <p className="max-w-sm text-sm text-muted-foreground">{sub}</p>
@@ -553,7 +554,7 @@ function Clubs() {
   return (
     <section id="clubs" className="bg-background px-5 py-20 sm:py-28">
       <div className="mx-auto max-w-6xl">
-        <SectionHead title="Clubs & Memberships" sub="Creative communities and collaborative craft." index="" />
+        <SectionHead title="Clubs & Memberships" sub="Creative communities and collaborative craft." />
         <ul className="mt-10 grid gap-4 sm:grid-cols-2">
           {clubs.map(({ name, role, icon: Icon }) => (
             <li key={name} className="membership-card motion-item flex min-w-0 items-center gap-5 border border-border bg-card p-5 sm:p-7">
