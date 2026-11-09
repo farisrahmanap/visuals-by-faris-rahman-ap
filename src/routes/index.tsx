@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 
-import { ArrowDown, ArrowUpRight, Facebook, FileDown, Instagram, Youtube } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Camera, Clapperboard, Facebook, FileDown, Instagram, Youtube } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import studio from "@/assets/editing-studio.jpg";
 import aboutPortrait from "@/assets/about-portrait-chest-up.png.asset.json";
@@ -11,6 +11,7 @@ import afterEffects from "@/assets/software-after-effects.svg.asset.json";
 import lightroom from "@/assets/software-lightroom.png.asset.json";
 import resolve from "@/assets/software-resolve.png.asset.json";
 import capcut from "@/assets/software-capcut.svg.asset.json";
+import carFilm from "@/assets/fim_1_of_car.mp4.asset.json";
 
 
 export const Route = createFileRoute("/")({
@@ -48,6 +49,7 @@ const HERO_VIDEO_SRC = `${CDN}/925b57d9-b977-43ab-8f12-a86478ed9759/For_Portfoli
 const SECOND_HERO_VIDEO_SRC = `${CDN}/3e354364-dc40-4d76-ac10-13d8af64b57c/0922_1.mp4`;
 const WORKS_VIDEO_1006_SRC = `${CDN}/1e484aff-e292-4f31-a18a-86a9a2832fa9/1006.mp4`;
 const WORKS_VIDEO_1006_1_SRC = "/media/1006_1.mp4";
+const CAR_FILM_SRC = `${ASSET_HOST}${carFilm.url}`;
 // The résumé PDF (14 MB) exceeds the repo limit, so it streams from the CDN.
 const RESUME_SRC = `${CDN}/4a018a97-474b-4204-bfa2-fea38ab0bf58/Faris_Rahman_AP_resume.pdf`;
 
@@ -218,6 +220,7 @@ const WORKS = [
   { src: HERO_VIDEO_SRC, orientation: "portrait", title: "Film 02", category: "Video Editing · Color Grading" },
   { src: WORKS_VIDEO_1006_SRC, orientation: "portrait", title: "Film 03", category: "Video Editing" },
   { src: WORKS_VIDEO_1006_1_SRC, orientation: "portrait", title: "Film 04", category: "Video Editing" },
+  { src: CAR_FILM_SRC, orientation: "landscape", title: "Film 05", category: "Video Editing" },
 ] as const;
 
 const SERVICES = [
@@ -244,7 +247,7 @@ function Hero() {
   const [activeVideo, setActiveVideo] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
   const [ready, setReady] = useState(false);
-  const videos = [SECOND_HERO_VIDEO_SRC, HERO_VIDEO_SRC];
+  const videos = [SECOND_HERO_VIDEO_SRC, HERO_VIDEO_SRC, CAR_FILM_SRC];
   useEffect(() => {
     const t = requestAnimationFrame(() => setReady(true));
     return () => cancelAnimationFrame(t);
@@ -542,6 +545,31 @@ function About() {
   );
 }
 
+function Clubs() {
+  const clubs = [
+    { name: "TKM Photography Club (TPC)", role: "Member", icon: Camera },
+    { name: "Film and Drama Club (FD Club)", role: "Core Member", icon: Clapperboard },
+  ];
+  return (
+    <section id="clubs" className="bg-background px-5 py-20 sm:py-28">
+      <div className="mx-auto max-w-6xl">
+        <SectionHead title="Clubs & Memberships" sub="Creative communities and collaborative craft." index="" />
+        <ul className="mt-10 grid gap-4 sm:grid-cols-2">
+          {clubs.map(({ name, role, icon: Icon }) => (
+            <li key={name} className="membership-card motion-item flex min-w-0 items-center gap-5 border border-border bg-card p-5 sm:p-7">
+              <Icon className="h-6 w-6 shrink-0 text-accent-red" aria-hidden="true" />
+              <div className="min-w-0">
+                <h3 className="text-sm font-semibold uppercase">{name}</h3>
+                <p className="mt-2 text-xs tracking-[0.2em] text-muted-foreground uppercase">{role}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
 
 // Motivational lines + comments shown over the editing-studio backdrop.
 // SAMPLE text — replace with Faris's real quotes and client comments.
@@ -609,6 +637,7 @@ function Index() {
       <main>
         <Hero />
         <About />
+        <Clubs />
         <Services />
         <Photos />
         <Works />
