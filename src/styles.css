@@ -725,6 +725,11 @@ a:focus-visible { outline: 2px solid var(--accent-red); outline-offset: 5px; }
 .home-scroll-cue:hover { color: var(--accent-red); border-color: var(--accent-red); transform: translateY(3px); }
 .about-portrait-frame { aspect-ratio: 16 / 9; background: var(--card); }
 .about-portrait { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+.membership-card { border-radius: 4px; transition: border-color .35s ease, transform .5s cubic-bezier(.22, 1, .36, 1); }
+.membership-card:hover { border-color: color-mix(in oklab, var(--accent-red) 60%, transparent); }
+@media (hover: hover) and (pointer: fine) {
+  .membership-card[data-entered="true"]:hover { transform: translateY(-3px); }
+}
 @media (max-width: 639px) {
   .home-hero { min-height: max(760px, 100svh); padding-top: 10rem; padding-bottom: 8rem; }
   .home-video-shade { background: linear-gradient(90deg, color-mix(in oklab, var(--background) 86%, transparent), color-mix(in oklab, var(--background) 60%, transparent)), linear-gradient(0deg, color-mix(in oklab, var(--background) 82%, transparent), transparent 62%, color-mix(in oklab, var(--background) 45%, transparent)); }
