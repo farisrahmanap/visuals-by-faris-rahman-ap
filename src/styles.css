@@ -723,7 +723,7 @@ a:focus-visible { outline: 2px solid var(--accent-red); outline-offset: 5px; }
   transition: color .25s ease, border-color .25s ease, transform .25s ease;
 }
 .home-scroll-cue:hover { color: var(--accent-red); border-color: var(--accent-red); transform: translateY(3px); }
-.about-portrait-frame { aspect-ratio: 16 / 9; background: var(--card); }
+.about-portrait-frame { aspect-ratio: 1 / 1; border-radius: 50%; background: var(--card); }
 .about-portrait { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
 .membership-card { border-radius: 4px; transition: border-color .35s ease, transform .5s cubic-bezier(.22, 1, .36, 1); }
 .membership-card:hover { border-color: color-mix(in oklab, var(--accent-red) 60%, transparent); }
