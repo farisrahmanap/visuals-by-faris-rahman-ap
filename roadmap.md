@@ -11,4 +11,4 @@
 - [x] Verify the Home and About layouts at desktop and phone widths; the hero video played and advanced sequentially, the portrait loaded, and no browser errors or phone-width overflow appeared.
 - [x] Add the requested club memberships and uploaded car film to Works and the Home sequence.
 - [x] Preserve all existing portfolio sections while adding the memberships and film.
-- [ ] Add the new film as first in Works and Home playback; use the new circular 1:1 About image.
+- [x] Add the new film as first in Works and Home playback; use the new circular 1:1 About image.
