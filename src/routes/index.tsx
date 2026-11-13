@@ -5,6 +5,7 @@ import { ArrowDown, ArrowUpRight, Camera, Clapperboard, Facebook, FileDown, Inst
 import { Button } from "@/components/ui/button";
 import studio from "@/assets/editing-studio.jpg";
 import aboutPortrait from "@/assets/about-portrait-chest-up.png.asset.json";
+import newAboutPortrait from "@/assets/about-faris-badge.png.asset.json";
 import premiere from "@/assets/software-premiere.svg.asset.json";
 import photoshop from "@/assets/software-photoshop.svg.asset.json";
 import afterEffects from "@/assets/software-after-effects.svg.asset.json";
@@ -12,6 +13,7 @@ import lightroom from "@/assets/software-lightroom.png.asset.json";
 import resolve from "@/assets/software-resolve.png.asset.json";
 import capcut from "@/assets/software-capcut.svg.asset.json";
 import carFilm from "@/assets/fim_1_of_car.mp4.asset.json";
+import newFilm from "@/assets/1113.mp4.asset.json";
 
 
 export const Route = createFileRoute("/")({
@@ -47,6 +49,7 @@ const ASSET_HOST = "https://id-preview--f18c1145-efcc-4ab6-afba-3c42b1b480e6.lov
 const CDN = `${ASSET_HOST}/__l5e/assets-v1`;
 const HERO_VIDEO_SRC = `${CDN}/925b57d9-b977-43ab-8f12-a86478ed9759/For_Portfolio.mp4`;
 const SECOND_HERO_VIDEO_SRC = `${CDN}/3e354364-dc40-4d76-ac10-13d8af64b57c/0922_1.mp4`;
+const NEW_FILM_SRC = `${ASSET_HOST}${newFilm.url}`;
 const WORKS_VIDEO_1006_SRC = `${CDN}/1e484aff-e292-4f31-a18a-86a9a2832fa9/1006.mp4`;
 const WORKS_VIDEO_1006_1_SRC = "/media/1006_1.mp4";
 const CAR_FILM_SRC = `${ASSET_HOST}${carFilm.url}`;
@@ -217,11 +220,12 @@ function Header() {
 
 /* ---------- WORKS SHOWN AS SEPARATE PLAYERS BELOW THE HERO ---------- */
 const WORKS = [
-  { src: SECOND_HERO_VIDEO_SRC, orientation: "landscape", title: "Film 01", category: "Video Editing · Color Grading" },
-  { src: HERO_VIDEO_SRC, orientation: "portrait", title: "Film 02", category: "Video Editing · Color Grading" },
-  { src: WORKS_VIDEO_1006_SRC, orientation: "portrait", title: "Film 03", category: "Video Editing" },
-  { src: WORKS_VIDEO_1006_1_SRC, orientation: "portrait", title: "Film 04", category: "Video Editing" },
-  { src: CAR_FILM_SRC, orientation: "landscape", title: "Film 05", category: "Video Editing" },
+  { src: NEW_FILM_SRC, orientation: "landscape", title: "Film 01", category: "Video Editing" },
+  { src: SECOND_HERO_VIDEO_SRC, orientation: "landscape", title: "Film 02", category: "Video Editing · Color Grading" },
+  { src: HERO_VIDEO_SRC, orientation: "portrait", title: "Film 03", category: "Video Editing · Color Grading" },
+  { src: WORKS_VIDEO_1006_SRC, orientation: "portrait", title: "Film 04", category: "Video Editing" },
+  { src: WORKS_VIDEO_1006_1_SRC, orientation: "portrait", title: "Film 05", category: "Video Editing" },
+  { src: CAR_FILM_SRC, orientation: "landscape", title: "Film 06", category: "Video Editing" },
 ] as const;
 
 const SERVICES = [
@@ -248,7 +252,7 @@ function Hero() {
   const [activeVideo, setActiveVideo] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
   const [ready, setReady] = useState(false);
-  const videos = [SECOND_HERO_VIDEO_SRC, HERO_VIDEO_SRC, CAR_FILM_SRC];
+  const videos = [NEW_FILM_SRC, SECOND_HERO_VIDEO_SRC, HERO_VIDEO_SRC, CAR_FILM_SRC];
   useEffect(() => {
     const t = requestAnimationFrame(() => setReady(true));
     return () => cancelAnimationFrame(t);
@@ -478,11 +482,11 @@ function About() {
       <div className="mx-auto max-w-6xl">
         <SectionHead index="01" title="About" sub="Video editor, photographer and color grader based in Kerala." />
         <div className="mt-12 grid gap-12 sm:mt-16 md:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] md:gap-16">
-          <figure className="about-portrait-figure mx-auto w-full max-w-sm">
+          <figure className="about-portrait-figure mx-auto w-full max-w-[20rem]">
             <div className="about-portrait-frame overflow-hidden border border-border/60">
               <img
-                src={`${ASSET_HOST}${aboutPortrait.url}`}
-                alt="Chest-up portrait of Faris Rahman in a sage green shirt"
+                src={`${ASSET_HOST}${newAboutPortrait.url}`}
+                alt="Circular red-and-white Faris Rahman portrait badge with editing software icons"
                 loading="lazy"
                 className="about-portrait"
               />
