@@ -12,3 +12,4 @@
 - [x] Add the requested club memberships and uploaded car film to Works and the Home sequence.
 - [x] Preserve all existing portfolio sections while adding the memberships and film.
 - [x] Add the new film as first in Works and Home playback; use the new circular 1:1 About image.
+- [x] Add Civil Service Aspirants Club (CSAC) as a Media Member in Clubs & Memberships.
