@@ -554,12 +554,13 @@ function Clubs() {
   const clubs = [
     { name: "TKM Photography Club (TPC)", role: "Member", icon: Camera },
     { name: "Film and Drama Club (FD Club)", role: "Core Member", icon: Clapperboard },
+    { name: "Civil Service Aspirants Club (CSAC)", role: "Media Member", icon: Clapperboard },
   ];
   return (
     <section id="clubs" className="bg-background px-5 py-20 sm:py-28">
       <div className="mx-auto max-w-6xl">
         <SectionHead title="Clubs & Memberships" sub="Creative communities and collaborative craft." />
-        <ul className="mt-10 grid gap-4 sm:grid-cols-2">
+        <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {clubs.map(({ name, role, icon: Icon }) => (
             <li key={name} className="membership-card motion-item flex min-w-0 items-center gap-5 border border-border bg-card p-5 sm:p-7">
               <Icon className="h-6 w-6 shrink-0 text-accent-red" aria-hidden="true" />
