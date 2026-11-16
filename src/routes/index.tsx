@@ -12,6 +12,7 @@ import afterEffects from "@/assets/software-after-effects.svg.asset.json";
 import lightroom from "@/assets/software-lightroom.png.asset.json";
 import resolve from "@/assets/software-resolve.png.asset.json";
 import capcut from "@/assets/software-capcut.svg.asset.json";
+import alightMotion from "@/assets/software-alight-motion.svg.asset.json";
 import carFilm from "@/assets/fim_1_of_car.mp4.asset.json";
 import newFilm from "@/assets/1113.mp4.asset.json";
 
@@ -126,6 +127,7 @@ function Whatsapp({ className }: { className?: string }) {
 const NAV = [
   { href: "#home", label: "Home" },
   { href: "#about", label: "About" },
+  { href: "#software", label: "Tools" },
   { href: "#clubs", label: "Clubs" },
   { href: "#photos", label: "Photos" },
   { href: "#works", label: "Works" },
@@ -166,7 +168,7 @@ function usePortfolioMotion() {
     const root = ref.current;
     if (!root) return;
     const items = root.querySelectorAll<HTMLElement>(
-      ".section-title, .eyebrow, .featured-card, .work-card, .photo-card, .compare, .service-row, .membership-card, .bio-name, .bio-role, .bio-grid > div, #about figure, #about .resume-link, .quote-mark, .quote-line, .quote-sub, .comment-card, .home-hero-content > *, .software-row li",
+      ".section-title, .eyebrow, .featured-card, .work-card, .photo-card, .compare, .service-row, .membership-card, .bio-name, .bio-role, .bio-context > div, #about figure, #about .resume-link, .quote-mark, .quote-line, .quote-sub, .home-hero-content > *, .software-mark",
     );
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
     let observer: IntersectionObserver | undefined;
@@ -236,6 +238,16 @@ const SERVICES = [
   ["Creative Direction", "Shaping the look, rhythm and feel of a project from first idea to final export."],
 ] as const;
 
+const SOFTWARE_TOOLS = [
+  { name: "Premiere Pro", icon: premiere },
+  { name: "After Effects", icon: afterEffects },
+  { name: "Photoshop", icon: photoshop },
+  { name: "Lightroom", icon: lightroom },
+  { name: "DaVinci Resolve", icon: resolve },
+  { name: "CapCut", icon: capcut },
+  { name: "Alight Motion", icon: alightMotion },
+] as const;
+
 function Lines({ lines, className = "" }: { lines: string[]; className?: string }) {
   return (
     <>
@@ -283,24 +295,22 @@ function Hero() {
             <Button asChild variant="cinematic" size="lg"><a href="#works"><ArrowUpRight />View My Works</a></Button>
             <Button asChild variant="outline" size="lg"><a href="#contact">Contact Me</a></Button>
           </div>
-          <ul className="software-row mt-8" aria-label="Editing software">
-            {[
-              { name: "Premiere Pro", icon: premiere }, { name: "CapCut", icon: capcut },
-              { name: "Photoshop", icon: photoshop }, { name: "After Effects", icon: afterEffects },
-              { name: "Lightroom", icon: lightroom }, { name: "DaVinci Resolve", icon: resolve },
-            ].map((tool) => <li key={tool.name}><img src={`${ASSET_HOST}${tool.icon.url}`} alt="" width={40} height={40} className={tool.name === "CapCut" ? "capcut-icon" : ""} /><span>{tool.name}</span></li>)}
-          </ul>
+          <a href="#software" className="hero-tool-cue mt-8 inline-flex items-center gap-3 text-[10px] tracking-[0.25em] text-foreground uppercase">
+            <span className="hero-tool-cue-line" aria-hidden="true" />
+            The tools behind the frame
+            <ArrowDown className="h-3.5 w-3.5" aria-hidden="true" />
+          </a>
         </div>
         <a href="#featured" aria-label="Scroll to featured photography" className="home-scroll-cue"><ArrowDown className="h-5 w-5" /></a>
       </section>
       <section id="featured" className="bg-background">
         <div className="mx-auto max-w-6xl px-5 pt-10 pb-8">
         <div className="grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4">
-          <div className="min-w-0"><p className="eyebrow">Featured Works</p><h2 className="section-title mt-3">Visual stories <span className="text-accent-red">that breathe</span></h2></div>
+          <div className="min-w-0"><p className="eyebrow">A study in light and place</p><h2 className="section-title featured-heading mt-3">Frames from <span className="text-accent-red">the field</span></h2></div>
           <a href="#photos" aria-label="Explore photography" className="text-muted-foreground"><ArrowDown className="h-6 w-6" /></a>
         </div>
         <div className="featured-grid mt-6">
-          {PHOTOS.filter((_, index) => [5, 8, 2].includes(index)).map((photo) => <a href="#photos" key={photo.src} className="featured-card"><img src={photo.src} alt={photo.alt} loading="lazy" /><span className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2 px-4 py-3"><span className="min-w-0"><span className="block text-xs font-semibold uppercase">{photo.title}</span><span className="text-[10px] text-muted-foreground uppercase">Photography</span></span><ArrowUpRight className="h-4 w-4" /></span></a>)}
+          {PHOTOS.filter((_, index) => [5, 8, 2].includes(index)).map((photo, index) => <a href="#photos" key={photo.src} className={`featured-card featured-card-${index + 1}`}><img src={photo.src} alt={photo.alt} loading="lazy" /><span className="featured-caption"><span className="featured-caption-copy"><span className="block text-[10px] tracking-[0.3em] text-accent-red uppercase">Photography · {String(index + 1).padStart(2, "0")}</span><span className="mt-2 block text-sm font-semibold uppercase">{photo.title}</span></span><ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden="true" /></span></a>)}
         </div>
         </div>
       </section>
@@ -459,13 +469,6 @@ function ColorGrading() {
 const BIO = {
   name: "Faris Rahman A P",
   roles: ["Video Editor", "Photographer", "Color Grader", "Cinematographer"],
-  tools: [
-    "Adobe Premiere Pro",
-    "DaVinci Resolve",
-    "CapCut",
-    "Adobe Photoshop",
-    "Adobe After Effects",
-  ],
   background:
     "Mechanical Engineering student at T.K.M. College of Engineering, Kollam, Kerala.",
   involvement: "Contributes to the media wing of the Civil Service Aspirants Club.",
@@ -480,7 +483,7 @@ function About() {
       className={`${reveal.className} bg-background px-5 py-28 sm:py-40`}
     >
       <div className="mx-auto max-w-6xl">
-        <SectionHead index="01" title="About" sub="Video editor, photographer and color grader based in Kerala." />
+        <SectionHead index="01" title="About" sub="A visual practice shaped by photography, filmmaking and post-production." />
         <div className="mt-12 grid gap-12 sm:mt-16 md:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] md:gap-16">
           <figure className="about-portrait-figure mx-auto w-full max-w-[20rem]">
             <div className="about-portrait-frame overflow-hidden border border-border/60">
@@ -504,21 +507,13 @@ function About() {
                 </li>
               ))}
             </ul>
-            <div className="bio-grid mt-16 sm:mt-24">
-              <div>
-                <p className="bio-label">Tools</p>
-                <ul className="mt-2">
-                  {BIO.tools.map((tool) => (
-                    <li key={tool} className="bio-item">
-                      {tool}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            <div className="bio-context mt-16 sm:mt-24">
               <div>
                 <p className="bio-label">Background</p>
                 <p className="bio-text mt-4">{BIO.background}</p>
-                <p className="bio-label mt-10">Involvement</p>
+              </div>
+              <div>
+                <p className="bio-label">Involvement</p>
                 <p className="bio-text mt-4">{BIO.involvement}</p>
               </div>
             </div>
@@ -550,6 +545,29 @@ function About() {
   );
 }
 
+function SoftwareShowcase() {
+  const reveal = useReveal<HTMLElement>();
+  return (
+    <section id="software" ref={reveal.ref} className={`${reveal.className} software-section relative overflow-hidden bg-card px-5 py-24 sm:py-32`}>
+      <div className="software-section-rule" aria-hidden="true" />
+      <div className="mx-auto max-w-6xl">
+        <SectionHead index="02" title="Tools behind the frame" sub="The software I use across the edit, grade and final image." />
+        <ul className="software-stage mt-12 sm:mt-16" aria-label="Creative software">
+          {SOFTWARE_TOOLS.map((tool, index) => (
+            <li key={tool.name} className="software-mark" style={{ transitionDelay: `${index * 75}ms` }}>
+              <div className="software-mark-art">
+                <img src={`${ASSET_HOST}${tool.icon.url}`} alt="" loading="lazy" decoding="async" />
+              </div>
+              <span className="software-mark-name">{tool.name}</span>
+              <span className="software-mark-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
 function Clubs() {
   const clubs = [
     { name: "TKM Photography Club (TPC)", role: "Member", icon: Camera },
@@ -557,12 +575,12 @@ function Clubs() {
     { name: "Civil Service Aspirants Club (CSAC)", role: "Media Member", icon: Clapperboard },
   ];
   return (
-    <section id="clubs" className="bg-background px-5 py-20 sm:py-28">
+    <section id="clubs" className="clubs-section bg-background px-5 py-20 sm:py-28">
       <div className="mx-auto max-w-6xl">
         <SectionHead title="Clubs & Memberships" sub="Creative communities and collaborative craft." />
         <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {clubs.map(({ name, role, icon: Icon }) => (
-            <li key={name} className="membership-card motion-item flex min-w-0 items-center gap-5 border border-border bg-card p-5 sm:p-7">
+            <li key={name} className="membership-card motion-item flex min-w-0 items-center gap-5 border-y border-border bg-background px-2 py-5 sm:px-5 sm:py-7">
               <Icon className="h-6 w-6 shrink-0 text-accent-red" aria-hidden="true" />
               <div className="min-w-0">
                 <h3 className="text-sm font-semibold uppercase">{name}</h3>
@@ -577,24 +595,11 @@ function Clubs() {
 }
 
 
-// Motivational lines + comments shown over the editing-studio backdrop.
-// SAMPLE text — replace with Faris's real quotes and client comments.
+// Craft-focused statements shown over the editing-studio backdrop.
 const MOTIVATION = [
   "Every frame carries a feeling — my work is to make you feel it.",
   "Great edits aren't watched. They're felt.",
   "Light sets the mood. Color tells the truth. Rhythm tells the story.",
-] as const;
-
-const COMMENTS = [
-  {
-    text: "Faris turned our raw footage into something that felt far bigger than the shoot itself. The grade alone carried the whole mood of the film.",
-  },
-  {
-    text: "Fast, sharp and full of ideas. He understood the story faster than we could explain it.",
-  },
-  {
-    text: "The final cut gave me goosebumps. This is what a confident edit looks like.",
-  },
 ] as const;
 
 function Words() {
@@ -608,7 +613,7 @@ function Words() {
       <img src={studio} alt="" aria-hidden="true" loading="lazy" className="studio-background" />
       <div className="quotes-shade" aria-hidden="true" />
       <div className="relative z-10 mx-auto max-w-6xl px-5 py-28 sm:py-40">
-        <SectionHead index="06" title="Quotes" sub="The mindset behind the work — and what people say about it." />
+        <SectionHead index="07" title="On the craft" sub="The mindset behind the work." />
         <figure className="mt-14">
           <span className="quote-mark text-accent-red" aria-hidden="true">“</span>
           <blockquote className="quote-line mt-4 max-w-4xl">{MOTIVATION[0]}</blockquote>
@@ -618,16 +623,6 @@ function Words() {
             <p key={line} className="quote-sub stagger" style={{ transitionDelay: `${i * 120}ms` }}>
               {line}
             </p>
-          ))}
-        </div>
-        <div className="mt-20 grid gap-6 min-[640px]:grid-cols-3">
-          {COMMENTS.map((comment, i) => (
-            <figure key={comment.text} className="comment-card stagger" style={{ transitionDelay: `${i * 120}ms` }}>
-              <blockquote className="text-sm leading-relaxed text-foreground">{comment.text}</blockquote>
-              <figcaption className="mt-6 text-[10px] tracking-[0.35em] text-muted-foreground uppercase">
-                Client Comment · {String(i + 1).padStart(2, "0")}
-              </figcaption>
-            </figure>
           ))}
         </div>
       </div>
@@ -643,6 +638,7 @@ function Index() {
       <main>
         <Hero />
         <About />
+        <SoftwareShowcase />
         <Clubs />
         <Services />
         <Photos />
