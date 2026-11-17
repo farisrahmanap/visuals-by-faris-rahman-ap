@@ -239,10 +239,10 @@ const SERVICES = [
 ] as const;
 
 const SOFTWARE_TOOLS = [
-  { name: "Premiere Pro", icon: premiere },
-  { name: "After Effects", icon: afterEffects },
-  { name: "Photoshop", icon: photoshop },
-  { name: "Lightroom", icon: lightroom },
+  { name: "Adobe Premiere Pro", icon: premiere },
+  { name: "Adobe After Effects", icon: afterEffects },
+  { name: "Adobe Photoshop", icon: photoshop },
+  { name: "Adobe Lightroom", icon: lightroom },
   { name: "DaVinci Resolve", icon: resolve },
   { name: "CapCut", icon: capcut },
   { name: "Alight Motion", icon: alightMotion },
@@ -335,7 +335,7 @@ function Services() {
   return (
     <section id="services" ref={reveal.ref} className={`${reveal.className} bg-background px-5 py-28 sm:py-40`}>
       <div className="mx-auto max-w-6xl">
-        <SectionHead index="02" title="What I Do" sub="A complete visual pipeline — from the shoot to the final grade." />
+        <SectionHead index="04" title="What I Do" sub="A complete visual pipeline — from the shoot to the final grade." />
         <ol>
           {SERVICES.map(([name, desc], i) => (
             <li key={name} className="service-row stagger" style={{ transitionDelay: `${i * 90}ms` }}>
@@ -358,10 +358,10 @@ function Works() {
   return (
     <section id="works" ref={reveal.ref} className={`${reveal.className} bg-background px-5 py-28 sm:py-40`}>
       <div className="mx-auto max-w-6xl">
-        <SectionHead index="04" title="Works" sub="Selected films — press play and turn the sound on." />
-        <div className="mt-14 grid items-start gap-8 min-[560px]:grid-cols-2 sm:gap-10 lg:gap-12">
+        <SectionHead index="06" title="Works" sub="Selected films — press play and turn the sound on." />
+        <div className="works-editorial-grid mt-14">
           {WORKS.map((work, index) => (
-            <figure key={work.src} className="work-card stagger min-w-0" style={{ transitionDelay: `${index * 100}ms` }}>
+            <figure key={work.src} className={`work-card work-card-${index + 1} stagger min-w-0`} style={{ transitionDelay: `${index * 100}ms` }}>
               <div className={`work-frame${work.orientation === "portrait" ? " work-frame-portrait" : ""}`}>
                 <video
                   src={`${work.src}#t=0.5`}
@@ -394,7 +394,7 @@ function Photos() {
   return (
     <section id="photos" ref={reveal.ref} className={`${reveal.className} bg-background px-5 py-28 sm:py-40`}>
       <div className="mx-auto max-w-6xl">
-        <SectionHead index="03" title="Photos" sub="Selected stills — travel, architecture and available-light work." />
+        <SectionHead index="05" title="Photos" sub="Selected stills — travel, architecture and available-light work." />
         <div className="masonry mt-14">
           {PHOTOS.map((p, i) => (
             <figure key={p.src} className="photo-card stagger" style={{ transitionDelay: `${(i % 3) * 90}ms` }}>
@@ -454,7 +454,7 @@ function ColorGrading() {
       className={`${reveal.className} bg-background px-5 pb-32 sm:pb-44`}
     >
       <div className="mx-auto max-w-6xl">
-        <SectionHead index="05" title="Color Grading" sub="Drag to compare the untouched capture with the final cinematic grade." />
+        <SectionHead index="07" title="Color Grading" sub="Drag to compare the untouched capture with the final cinematic grade." />
 
         <div className="grade-grid mt-14">
           {COLOR_GRADES.map((comparison) => (
@@ -577,7 +577,7 @@ function Clubs() {
   return (
     <section id="clubs" className="clubs-section bg-background px-5 py-20 sm:py-28">
       <div className="mx-auto max-w-6xl">
-        <SectionHead title="Clubs & Memberships" sub="Creative communities and collaborative craft." />
+        <SectionHead index="03" title="Clubs & Memberships" sub="Creative communities and collaborative craft." />
         <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {clubs.map(({ name, role, icon: Icon }) => (
             <li key={name} className="membership-card motion-item flex min-w-0 items-center gap-5 border-y border-border bg-background px-2 py-5 sm:px-5 sm:py-7">
@@ -613,7 +613,7 @@ function Words() {
       <img src={studio} alt="" aria-hidden="true" loading="lazy" className="studio-background" />
       <div className="quotes-shade" aria-hidden="true" />
       <div className="relative z-10 mx-auto max-w-6xl px-5 py-28 sm:py-40">
-        <SectionHead index="07" title="On the craft" sub="The mindset behind the work." />
+        <SectionHead index="08" title="On the craft" sub="The mindset behind the work." />
         <figure className="mt-14">
           <span className="quote-mark text-accent-red" aria-hidden="true">“</span>
           <blockquote className="quote-line mt-4 max-w-4xl">{MOTIVATION[0]}</blockquote>
