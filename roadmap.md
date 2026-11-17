@@ -13,3 +13,6 @@
 - [x] Preserve all existing portfolio sections while adding the memberships and film.
 - [x] Add the new film as first in Works and Home playback; use the new circular 1:1 About image.
 - [x] Add Civil Service Aspirants Club (CSAC) as a Media Member in Clubs & Memberships.
+- [ ] Redesign the full portfolio into an editorial, motion-led experience while preserving all existing real media and functions.
+- [ ] Add an animated showcase for the six existing software logos and authentic Alight Motion artwork.
+- [ ] Remove invented client comments and verify responsive layouts, navigation, videos, comparison sliders, and reduced-motion behavior.
